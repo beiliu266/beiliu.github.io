@@ -8,9 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="https://beiliu266.github.io/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -55,12 +55,12 @@
       <nav id="sub-nav">
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
         
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://beiliu266.github.io"></form>
       </div>
     </div>
   </div>
@@ -68,6 +68,621 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-解决GitHub访问速度慢的问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/12/08/%E8%A7%A3%E5%86%B3GitHub%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2023-12-08T07:47:33.197Z" itemprop="datePublished">2023-12-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/12/08/%E8%A7%A3%E5%86%B3GitHub%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/">解决GitHub访问慢或者无法访问</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本地网络访问慢，科学上网速度很快<br>本地网络无法访问（响应时间过长导致无法访问）<br>由于github的加速分发CDN域名assets-cdn.github.com遭到DNS污染，无法访问</p>
+<p>1.修改本地hosts映射<br>域名解析直接指向GitHub的IP地址，以此来绕过DNS解析</p>
+<p>1.1 查看最新GitHub 的最新ip地址<br>在 ip地址查询 网站中查询GitHub相关的网站对应的最新IP地址</p>
+<p>github.com<br>github.global.ssl.fastly.net<br>assets-cdn.github.com<br>codeload.github.com<br>在当前网站中查询指定网站ip地址还可以使用另外方法:</p>
+<p>①直接将网站作为参数进行请求，省略点击查询的步骤：</p>
+<p><a target="_blank" rel="noopener" href="https://websites.ipaddress.com/github.global.ssl.fastly.net">https://websites.ipaddress.com/github.global.ssl.fastly.net</a><br><a target="_blank" rel="noopener" href="https://websites.ipaddress.com/github.com">https://websites.ipaddress.com/github.com</a><br><a target="_blank" rel="noopener" href="https://websites.ipaddress.com/assets-cdn.github.com">https://websites.ipaddress.com/assets-cdn.github.com</a><br><a target="_blank" rel="noopener" href="https://websites.ipaddress.com/codeload.github.com">https://websites.ipaddress.com/codeload.github.com</a><br>②将ip查询网站拼接在之后进行查询</p>
+<p><a target="_blank" rel="noopener" href="http://github.global.ssl.fastly.net.ipaddress.com/">http://github.global.ssl.fastly.net.ipaddress.com/</a><br><a target="_blank" rel="noopener" href="https://github.com.ipaddress.com/">https://github.com.ipaddress.com/</a><br><a target="_blank" rel="noopener" href="https://assets-cdn.github.com.ipaddress.com/">https://assets-cdn.github.com.ipaddress.com/</a><br><a target="_blank" rel="noopener" href="https://codeload.github.com.ipaddress.com/">https://codeload.github.com.ipaddress.com/</a><br>1.2 本地hosts文件映射ip地址<br>    找到对应的IP地址后，将IP地址与网站地址进行对应，并将对应关系写入本地hosts文件中。</p>
+<p>​    在windows系统中的C:\Windows\System32\drivers\etc下找到hosts文件，编辑打开，将四个网站的IP地址和网站地址对应写入进入，作为DNS的映射。</p>
+<p>​    hosts文件直接编辑修改时可能没有权限，可以通过以下方法完成修改：</p>
+<p>​        修改当前文件权限，右键hosts文件 -&gt; 属性 -&gt; 安全 -&gt; 编辑 -&gt; Users -&gt; Users的权限后加入写权限<br>​		将当前文件复制到别的盘中，修改文件后复制回来覆盖原来文件<br>#github dns映射 格式如：  [ip]: [domainName]<br>199.232.69.194 github.global.ssl.Fastly.net<br>140.82.114.4 GitHub.com<br>185.199.108.153 assets-cdn.Github.com<br>140.82.114.9 codeload.Github.com</p>
+<p>(  例如：</p>
+<p>20.205.243.166        github.com</p>
+<p>GitHub Start</p>
+<p>140.82.114.4 github.com<br>199.232.69.194 github.global.ssl.fastly.net</p>
+<p>GitHub End)</p>
+<p>1.3 刷新DNS缓存来访问新的映射<br>hosts文件内容更新成功后，还需要刷新windows系统的DNS才可以生效。</p>
+<p>使用 win+R ，打开cmd命令行，输入 ipconfig&#x2F;flushdns 刷新DNS缓存即可。</p>
+<p>刷新完成后，再次打开github网站时速度会明显提升，需要注意的是以上github网站的ip经常发生变化，如果访问再次变慢可以重新更新映射信息。</p>
+<ol start="2">
+<li>一键更新<br>手动更新本地hosts文件的方式比较繁琐，我们可以编写程序来代替手动操作，实现需要时hosts文件内容的一键更新。</li>
+</ol>
+<p>2.1 利用开源项目<br>推荐一个 github 开源项目：更新hosts ，作者会每日提供最新的相关 ip 地址映射信息，我们可以直接复制使用或者使用其中的程序进行一键更新操作。</p>
+<p>作为一个coder，我们也可以自己去实现一个脚本程序。</p>
+<ol start="3">
+<li>Chrome插件<br>chrome 插件如 github 加速 等，可以实现在访问和下载项目时使用镜像加速，提升访问速度。</li>
+</ol>
+<p>如果无法访问chrome下载插件，推荐一个好用的chrome插件下载网站：CrxDL.COM ，下载后使用开发者模式安装插件即可使用。</p>
+<p>更多 chrome 插件安装使用方法参考文档：chrome 插件食用指南！</p>
+<ol start="4">
+<li>镜像网站<br>github访问速度慢，我们还可以使用镜像网站来代替github</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://hub.njuu.cf/search">https://hub.njuu.cf/search</a><br><a target="_blank" rel="noopener" href="https://www.gitclone.com/gogs/search/clonesearch">https://www.gitclone.com/gogs/search/clonesearch</a><br>以上网站作为镜像网站，基本包含了github上已有的项目信息，并且可以查看和下载相关项目，速度还不错，可以作为备用网站使用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://beiliu266.github.io/2023/12/08/%E8%A7%A3%E5%86%B3GitHub%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" data-id="clpwbxklk0004p4vw9ecv0kuw" data-title="解决GitHub访问慢或者无法访问" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Typora基本使用指南" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/12/08/Typora%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="article-date">
+  <time class="dt-published" datetime="2023-12-08T07:47:33.194Z" itemprop="datePublished">2023-12-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/12/08/Typora%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">Typora基本语法指南</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Typora简介"><a href="#Typora简介" class="headerlink" title="Typora简介"></a>Typora简介</h3><p>Typora是一款轻便简洁的Markdown编辑器，支持即时渲染技术，这也是与其他Markdown编辑器最显著的区别。即时渲染使得你写Markdown就想是写Word文档一样流畅自如，不像其他编辑器的有编辑栏和显示栏。</p>
+<ul>
+<li>Typora删除了预览窗口，以及所有其他不必要的干扰。取而代之的是实时预览。</li>
+<li>Markdown的语法因不同的解析器或编辑器而异，Typora使用的是GitHub Flavored Markdown。</li>
+</ul>
+<h3 id="Markdown介绍"><a href="#Markdown介绍" class="headerlink" title="Markdown介绍"></a>Markdown介绍</h3><ul>
+<li>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。</li>
+<li>Markdown 语言在 2004 由约翰·格鲁伯（英语：John Gruber）创建。</li>
+<li>Markdown 编写的文档可以导出 HTML 、Word、图像、PDF、Epub 等多种格式的文档。</li>
+<li>Markdown 编写的文档后缀为 <code>.md</code>, <code>.markdown</code>。</li>
+</ul>
+<h2 id="Typora基本技巧"><a href="#Typora基本技巧" class="headerlink" title="Typora基本技巧"></a>Typora基本技巧</h2><h3 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h3><ul>
+<li>加粗： <code>Ctrl + B</code></li>
+<li>撤销： <code>Ctrl + Z</code></li>
+<li>字体倾斜 ：<code>Ctrl+I</code></li>
+<li>下划线：<code>Ctrl+U</code></li>
+<li>多级标题： <code>Ctrl + 1~6</code></li>
+<li>有序列表：<code>Ctrl + Shift + [</code></li>
+<li>无序列表：<code>Ctrl + Shift + ]</code></li>
+<li>降级快捷键 ：<code>Tab</code></li>
+<li>升级快捷键：<code>Shift + Tab</code></li>
+<li>插入链接： <code>Ctrl + K</code></li>
+<li>插入公式： <code>Ctrl + Shift + M</code></li>
+<li>行内代码： <code>Ctrl + Shift + K</code></li>
+<li>插入图片： <code>Ctrl + Shift + I</code></li>
+<li>返回Typora顶部：<code>Ctrl+Home</code></li>
+<li>返回Typora底部 ：<code>Ctrl+End</code></li>
+<li>创建表格 ：<code>Ctrl+T</code></li>
+<li>选中某句话 ：<code>Ctrl+L</code></li>
+<li>选中某个单词 ：<code>Ctrl+D</code></li>
+<li>选中相同格式的文字 ：<code>Ctrl+E</code></li>
+<li>搜索: <code>Ctrl+F</code></li>
+<li>搜索并替换 ：<code>Ctrl+H</code></li>
+<li>删除线 ：<code>Alt+Shift+5</code></li>
+<li>引用 ：<code>Ctrl+Shift+Q</code></li>
+<li>生成目录：<code>[TOC]+Enter</code></li>
+</ul>
+<p>注：一些实体符号需要在实体符号之前加” \ ”才能够显示</p>
+<h3 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h3><p>输入[TOC]即可产生菜单，菜单会自动更新</p>
+<h3 id="区域元素"><a href="#区域元素" class="headerlink" title="区域元素"></a>区域元素</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">YAML FONT Matters</span><br></pre></td></tr></table></figure>
+
+<p>在文章的最上方输入—，按换行键产生，然后在里面输入内容即可。</p>
+<h3 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h3><p>按换行键[Enter]建立新的一行,按<code>Shift</code>+<code>Enter</code>可以创建一个比段落间距更小的行间距。可在行尾插入打断线，禁止向后插入</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">打断线&lt;br/&gt;后面的内容将自动换行</span><br></pre></td></tr></table></figure>
+
+<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>开头#的个数表示，空格+文字。标题有1~6个级别，#表示开始，按换行键结束</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题 快捷键为 Ctrl + 1</span><br><span class="line">## 二级标题 快捷键为 Ctrl + 2</span><br><span class="line">......</span><br><span class="line">###### 六级标题 快捷键为 Ctrl + 6</span><br></pre></td></tr></table></figure>
+
+<h3 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h3><p>斜体以**或__括住</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*这是斜体字体1*_这是斜体字体2_</span><br></pre></td></tr></table></figure>
+
+<p><em>这是斜体字体1</em><br><em>这是斜体字体2</em></p>
+<p>加粗<br>开头<code>**</code>，结尾<code>**</code>。<br>或者开头<code>__</code>,结尾<code>__</code>(两个短横线)。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**这是加粗字体1** __这是加粗字体2__</span><br></pre></td></tr></table></figure>
+
+<p>这是加粗字体1<br>这是加粗字体2</p>
+<p>删除线<br>开头<code>~~</code>，结尾<code>~~</code>。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~这是错误文字~~</span><br></pre></td></tr></table></figure>
+
+<p>这是错误文字</p>
+<p>下划线使用HTML标签<u>下划线</u></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;u&gt;下划线&lt;/u&gt;</span><br></pre></td></tr></table></figure>
+
+<p>下划线</p>
+<p>高亮<br><code>==内容==</code>，需要自己在偏好设置里面打开这项功能</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">==高亮==</span><br><span class="line">高亮</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>行内输入代码块快捷键： <code>Ctrl + Shift + K</code></p>
+<ol>
+<li>开头&#96;&#96;&#96;+语言名，开启代码块，换行键换行，光标下移键跳出<br>示例：</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(&quot;hello,python!&quot;&quot;)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>用两个&#96;在正常段落中表示代码<br>例如：</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Use the `printf()`function.</span><br></pre></td></tr></table></figure>
+
+<p>Use the <code>printf()</code>function.</p>
+<h3 id="数学式"><a href="#数学式" class="headerlink" title="数学式"></a>数学式</h3><p>打开Typora选择数学模块</p>
+<ul>
+<li>点击“段落”—&gt;“公式块”</li>
+<li>快捷键Ctrl+Shift+m</li>
+<li><code>“$$”+回车</code></li>
+</ul>
+<p>以上三种方式都能打开数学公式的编辑栏。</p>
+<p>示例：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入$，然后按ESC键，之后输入Tex命令，可预览</span><br><span class="line">例如：</span><br><span class="line">$\lim_&#123;x\to\infty&#125;\exp(-x)=0$</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic2.zhimg.com/80/v2-c0139796d5848b706c9f2f4d79c7a749_1440w.webp" alt="img"></p>
+<p>下标使用~~括住内容。需要自己在偏好设置里面打开这项功能</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H~2~O</span><br></pre></td></tr></table></figure>
+
+<p>H2O</p>
+<p>上标</p>
+<p>使用^括住内容。需要自己在偏好设置里面打开这项功能</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y^2^=4</span><br></pre></td></tr></table></figure>
+
+<p>y2&#x3D;4</p>
+<h3 id="表情"><a href="#表情" class="headerlink" title="表情"></a>表情</h3><p>Typora语法支持添加emoji表情，输入不同的符号码（两个冒号包围的字符）可以显示出不同的表情。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">以:开始，然后输入表情的英文单词,以：结尾，将直接输入该表情.例如：</span><br><span class="line">:smile</span><br><span class="line">:cry</span><br><span class="line">:happy</span><br></pre></td></tr></table></figure>
+
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p>开头|+列名+|+列名+|+换行键，创建一个2*2表格，<code>Ctrl+Enter</code>可建立新行。</p>
+<p>示例：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">|第一列|第二列|</span><br></pre></td></tr></table></figure>
+
+<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><p>输入 <code>***</code> 或者 <code>---</code>,按换行键换行，即可绘制一条水平线。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">***---</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>上下是水平线</p>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>开头&gt;表示，空格+文字，按换行键换行，双按换行跳出</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 引注1</span><br><span class="line">&gt; ···</span><br><span class="line">&gt; 引注2</span><br><span class="line">&gt;还有一行，双按换行键跳出引注模式</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<blockquote>
+<p>引注1<br>···<br>引注2还有一行，双按换行键跳出引注模式</p>
+</blockquote>
+<p>普通引用</p>
+<blockquote>
+<p>空格 + 引用文字：在引用的文字前加&gt;+空格即可，引用可以嵌套。</p>
+</blockquote>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 引用文本前使用 [大于号+空格]</span><br><span class="line">&gt; 这行可以不加，新起一行都要加上哦</span><br><span class="line">&gt;这是引用的内容</span><br><span class="line">&gt;&gt;这是引用的内容</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<blockquote>
+<p>引用文本前使用 [大于号+空格]这行可以不加，新起一行都要加上哦<br>这是引用的内容<br>这是引用的内容</p>
+</blockquote>
+<p>列表中使用</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* 第一项   </span><br><span class="line">&gt; 引用1    </span><br><span class="line">&gt; 引用2</span><br><span class="line">* 第二项</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<ul>
+<li>第一项</li>
+</ul>
+<blockquote>
+<p>引用1引用2</p>
+</blockquote>
+<ul>
+<li>第二项</li>
+</ul>
+<p>引用里嵌套引用</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 最外层引用</span><br><span class="line">&gt; &gt; 多一个 </span><br><span class="line">&gt; 嵌套一层引用</span><br><span class="line">&gt; &gt; &gt; 可以嵌套很多层</span><br></pre></td></tr></table></figure>
+
+<p>引用里嵌套列表</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; - 这是引用里嵌套的一个列表</span><br><span class="line">&gt; - 还可以有子列表</span><br><span class="line">&gt;     * 子列表需要从 - 之后延后四个空格开始</span><br></pre></td></tr></table></figure>
+
+<p>引用里嵌套代码块</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;     同样的，在前面加四个空格形成代码块</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>或者使用 &#96;&#96;&#96; 形成代码块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">### 脚注</span><br><span class="line"></span><br><span class="line">在需要添加脚注的文字后面+[+^+序列+]，注释的产生可以鼠标放置其上单击自动产生，添加信息</span><br><span class="line"></span><br><span class="line">或人工添加+[+^+序列+]+:</span><br><span class="line"></span><br><span class="line">```text</span><br><span class="line">脚注产生的方法[^footnote].</span><br><span class="line">[^footnote]:这个就是&quot;脚注&quot;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>脚注的产生方法[1]</p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>链接<br>输入网址，单击链接，展开后可编辑<br>ctr+单击，打开链接<br>例如：<a href="https://link.zhihu.com/?target=https://www.baidu.com">https://www.baidu.com</a></p>
+<p>常用链接方法</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文字链接 [链接名称](http://链接网址)网址链接 &lt;http://链接网址&gt;</span><br></pre></td></tr></table></figure>
+
+<p>示例效果：百度</p>
+<p>超链接</p>
+<p>格式1：用[ ]括住要超链接的内容，紧接着用( )括住超链接源+名字，超链接源后面+超链接命名<br>同样ctrl+单击，打开链接例如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是[百度](https://www.baidu.com)官网</span><br></pre></td></tr></table></figure>
+
+<p>这是 百度官网格式2：超链接 title可加可不加</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">This is [an example](http://example.com/ &quot;Title&quot;) inline link.</span><br><span class="line">[This link](http://example.net/) has no title attribute.</span><br></pre></td></tr></table></figure>
+
+<p>This is an example inline link.This link has no title attribute.</p>
+<p>高级链接技巧</p>
+<p>使用[+超链接文字+]+[+标签+]，创建可定义链接<br>ctrl+单击，打开链接。示例1：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是[百度][id][id]:https://www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p>这是百度示例2：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">这个链接用 1 作为网址变量 [Google][1].</span><br><span class="line">这个链接用 yahoo 作为网址变量 [Yahoo!][yahoo].</span><br><span class="line">然后在文档的结尾为变量赋值（网址）  </span><br><span class="line">[1]: http://www.google.com/  </span><br><span class="line">[yahoo]: http://www.yahoo.com/</span><br></pre></td></tr></table></figure>
+
+<h3 id="URLs"><a href="#URLs" class="headerlink" title="URLs"></a>URLs</h3><p>用&lt;&gt;括住url，可手动设置url对于标准URLs，可自动识别</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;www.baidu.com&gt;</span><br></pre></td></tr></table></figure>
+
+<p>&lt;<a href="http://www.baidu.com>">www.baidu.com&gt;</a></p>
+<h3 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h3><p>开头*&#x2F;+&#x2F;- 加空格+文字，可以创建无序序列，换行键换行，删除键+shift+tab跳出<br>开头1.加空格+后接文字，可以创建有序序列例：</p>
+<ul>
+<li>第一个无序序列</li>
+<li>第二个无序序列</li>
+<li>······</li>
+</ul>
+<ol>
+<li>第一个有序序列</li>
+<li>第二个有序序列</li>
+<li>······</li>
+</ol>
+<p>可选序列</p>
+<p>开头序列+空格+[ ]+空格+文字，换行键换行，删除键+shift+tab跳出例如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- [ ] 第一个可选序列</span><br><span class="line">- [ ] 第二个可选序列</span><br><span class="line">- [ ] 第三个可选序列</span><br><span class="line">- [x] 第四个可选序列</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一个可选序列</li>
+<li>第二个可选序列</li>
+<li>第三个可选序列</li>
+<li>第四个可选序列<br>总结：先输入减号，然后输入空格，之后就变成了黑色圆点，在输入[]，在中间加个空格，回车就可以注：任务列表无快捷键，可以点击菜单栏段落，任务列表。</li>
+</ul>
+<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><blockquote>
+<p>Typora文本文档中有使用图片内容，如果需要发布在各个兼容Markdown的软件平台，需要预先上传文档中的图片至图床，再通过对图床的图片链接调用，才能正常显示，否则各个平台将无法看到该文档图片。<br>免费图床网址：<a href="https://link.zhihu.com/?target=https://sm.ms/">https://sm.ms/</a>图床设置：[Typora图床自动上传图片设置篇]</p>
+</blockquote>
+<ol>
+<li>手动添加：跟链接的方法区别在于前面加了个感叹号 <code>!</code>，这样是不是觉得好记多了呢？</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片名称](http://图片网址)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>当然，你也可以像网址那样对图片网址使用变量</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">这个链接用 1 作为网址变量 [Google][1].</span><br><span class="line">然后在文档的结尾位变量赋值（网址） </span><br><span class="line"></span><br><span class="line">[1]: http://www.google.com/logo.png</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>除了以上2种方式之外，还可以直接将图片拖拽进来，自动生成链接。</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![显示的文字](C:\Users\Hider\Desktop\echart.png &quot;图片标题&quot;)</span><br><span class="line">![显示的文字](C:\Users\Hider\Desktop\echart.png)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://beiliu266.github.io/2023/12/08/Typora%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" data-id="clpwbxkll0005p4vwanb59f8l" data-title="Typora基本语法指南" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Typora插入主题样式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/12/08/Typora%E6%8F%92%E5%85%A5%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-12-08T07:47:33.192Z" itemprop="datePublished">2023-12-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/12/08/Typora%E6%8F%92%E5%85%A5%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F/">Typora插入主题样式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1、官网（<a target="_blank" rel="noopener" href="https://theme.typoraio.cn/%EF%BC%89%E4%B8%8B%E8%BD%BD%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F">https://theme.typoraio.cn/）下载主题样式</a></p>
+<p><img src="C:\Users\beiliu\AppData\Roaming\Typora\typora-user-images\image-20231208144751260.png" alt="image-20231208144751260"></p>
+<p>2、打开下载好的文件夹，打开assets文件夹，将里面的内容复制到以下路径：C:\Users\***\AppData\Roaming\Typora\theme</p>
+<p><img src="C:\Users\beiliu\AppData\Roaming\Typora\typora-user-images\image-20231208145226477.png" alt="image-20231208145226477"></p>
+<p><img src="C:\Users\beiliu\AppData\Roaming\Typora\typora-user-images\image-20231208145303729.png" alt="image-20231208145303729"></p>
+<p>要将全部的Typora窗口关闭重启软件才能生效）</p>
+<p>该文件夹也可在偏好设置里面打开：</p>
+<p><img src="C:\Users\beiliu\AppData\Roaming\Typora\typora-user-images\image-20231208145431962.png" alt="image-20231208145431962"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://beiliu266.github.io/2023/12/08/Typora%E6%8F%92%E5%85%A5%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F/" data-id="clpwbxkli0001p4vw6eck76q1" data-title="Typora插入主题样式" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Hexo的搭建及上传过程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/12/08/Hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%B8%8A%E4%BC%A0%E8%BF%87%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2023-12-08T07:47:33.190Z" itemprop="datePublished">2023-12-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/12/08/Hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%B8%8A%E4%BC%A0%E8%BF%87%E7%A8%8B/">Hexo的搭建及上传过程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Hexo简介"><a href="#Hexo简介" class="headerlink" title="Hexo简介"></a><strong>Hexo简介</strong></h2><p>Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入<a href="https://link.zhihu.com/?target=https://hexo.io/zh-cn/">hexo官网</a>进行详细查看，因为Hexo的创建者是台湾人，对中文的支持很友好，可以选择中文进行查看。</p>
+<p>教程分三个部分，</p>
+<ul>
+<li>第一部分：hexo的初级搭建还有部署到github page上，以及个人域名的绑定。</li>
+<li>第二部分：hexo的基本配置，更换主题，实现多终端工作，以及在coding page部署实现国内外分流</li>
+<li>第三部分：hexo添加各种功能，包括搜索的SEO，阅读量统计，访问量统计和评论系统等。</li>
+</ul>
+<hr>
+<h2 id="Hexo搭建步骤"><a href="#Hexo搭建步骤" class="headerlink" title="Hexo搭建步骤"></a><strong>Hexo搭建步骤</strong></h2><ol>
+<li>安装Git</li>
+<li>安装Node.js</li>
+<li>安装Hexo</li>
+<li>GitHub创建个人仓库</li>
+<li>生成SSH添加到GitHub</li>
+<li>将hexo部署到GitHub</li>
+<li>设置个人域名</li>
+<li>发布文章</li>
+</ol>
+<h2 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1. 安装Git"></a><strong>1. 安装Git</strong></h2><p>Git是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的hexo博客文章，上传到GitHub的工具。Git非常强大，我觉得建议每个人都去了解一下。廖雪峰老师的Git教程写的非常好，大家可以了解一下。<a href="https://link.zhihu.com/?target=https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git教程</a></p>
+<p>windows：到git官网上下载,<a href="https://link.zhihu.com/?target=https://gitforwindows.org/">Download git</a>,下载后会有一个Git Bash的命令行工具，以后就用这个工具来使用git。</p>
+<p>linux：对linux来说实在是太简单了，因为最早的git就是在linux上编写的，只需要一行代码</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+
+<p>安装好后，用<code>git --version</code> 来查看一下版本</p>
+<h2 id="2-安装nodejs"><a href="#2-安装nodejs" class="headerlink" title="2. 安装nodejs"></a><strong>2. 安装nodejs</strong></h2><p>Hexo是基于nodeJS编写的，所以需要安装一下nodeJs和里面的npm工具。</p>
+<p>windows：<a href="https://link.zhihu.com/?target=https://nodejs.org/en/download/">nodejs</a>选择LTS版本就行了。</p>
+<p>linux：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure>
+
+<p>安装完后，打开命令行</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>检查一下有没有安装成功</p>
+<p>顺便说一下，windows在git安装完后，就可以直接使用git bash来敲命令行了，不用自带的cmd，cmd有点难用。</p>
+<h2 id="3-安装hexo"><a href="#3-安装hexo" class="headerlink" title="3. 安装hexo"></a><strong>3. 安装hexo</strong></h2><p>前面git和nodejs安装好后，就可以安装hexo了，你可以先创建一个文件夹blog，然后<code>cd</code>到这个文件夹下（或者在这个文件夹下直接右键git bash打开）。</p>
+<p>输入命令</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p>依旧用<code>hexo -v</code>查看一下版本</p>
+<p>至此就全部安装完了。</p>
+<p>接下来初始化一下hexo</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init myblog</span><br></pre></td></tr></table></figure>
+
+<p>这个myblog可以自己取什么名字都行，然后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> myblog //进入这个myblog文件夹</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>新建完成后，指定文件夹目录下有：</p>
+<ul>
+<li>node_modules: 依赖包</li>
+<li>public：存放生成的页面</li>
+<li>scaffolds：生成文章的一些模板</li>
+<li>source：用来存放你的文章</li>
+<li>themes：主题</li>
+<li>** _config.yml: 博客的配置文件**</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>打开hexo的服务，在浏览器输入localhost:4000就可以看到你生成的博客了。</p>
+<p>大概长这样：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-d301dfbac9165b21ab1ee0a860f44de4_1440w.webp" alt="img"></p>
+<p>使用ctrl+c可以把服务关掉。</p>
+<h2 id="4-GitHub创建个人仓库"><a href="#4-GitHub创建个人仓库" class="headerlink" title="4. GitHub创建个人仓库"></a><strong>4. GitHub创建个人仓库</strong></h2><p>首先，你先要有一个GitHub账户，去注册一个吧。</p>
+<p>注册完登录后，在<a href="https://link.zhihu.com/?target=http://GitHub.com">http://GitHub.com</a>中看到一个New repository，新建仓库</p>
+<p><img src="https://pic3.zhimg.com/80/v2-4387cb776ccc72189bc06fd511c1e19e_1440w.webp" alt="img"></p>
+<p>创建一个和你用户名相同的仓库，后面加.<a href="https://link.zhihu.com/?target=http://github.io">http://github.io</a>，只有这样，将来要部署到GitHub page的时候，才会被识别，也就是<a href="https://link.zhihu.com/?target=http://xxxx.github.io">http://xxxx.github.io</a>，其中xxx就是你注册GitHub的用户名。我这里是已经建过了。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-9d5692a0e62fd62f902f1085348f5e7e_1440w.webp" alt="img"></p>
+<p>点击create repository。</p>
+<h2 id="5-生成SSH添加到GitHub"><a href="#5-生成SSH添加到GitHub" class="headerlink" title="5. 生成SSH添加到GitHub"></a><strong>5. 生成SSH添加到GitHub</strong></h2><p>回到你的git bash中，</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;yourname&quot;</span><br><span class="line">git config --global user.email &quot;youremail&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这里的yourname输入你的GitHub用户名，youremail输入你GitHub的邮箱。这样GitHub才能知道你是不是对应它的账户。</p>
+<p>可以用以下两条，检查一下你有没有输对</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure>
+
+<p>然后创建SSH,一路回车</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候它会告诉你已经生成了.ssh的文件夹。在你的电脑中找到这个文件夹。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-a9593147853b8f2485f05d1f04d45bb6_1440w.webp" alt="img"></p>
+<p>ssh，简单来讲，就是一个秘钥，其中，<code>id_rsa</code>是你这台电脑的私人秘钥，不能给别人看的，<code>id_rsa.pub</code>是公共秘钥，可以随便给别人看。把这个公钥放在GitHub上，这样当你链接GitHub自己的账户时，它就会根据公钥匹配你的私钥，当能够相互匹配时，才能够顺利的通过git上传你的文件到GitHub上。</p>
+<p>而后在GitHub的setting中，找到SSH keys的设置选项，点击<code>New SSH key</code> 把你的<code>id_rsa.pub</code>里面的信息复制进去。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-aad16de6208ce8a7b2cd51b16a1b2aa2_1440w.webp" alt="img"></p>
+<p>在gitbash中，查看是否成功</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-将hexo部署到GitHub"><a href="#6-将hexo部署到GitHub" class="headerlink" title="6. 将hexo部署到GitHub"></a><strong>6. 将hexo部署到GitHub</strong></h2><p>这一步，我们就可以将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 <code>_config.yml</code>，翻到最后，修改为 YourgithubName就是你的GitHub账户</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/YourgithubName/YourgithubName.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>然后</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>hexo clean</code>清除了你之前生成的东西，也可以不加。 <code>hexo generate</code> 顾名思义，生成静态文章，可以用 <code>hexo g</code>缩写 <code>hexo deploy</code> 部署文章，可以用<code>hexo d</code>缩写</p>
+<p>注意deploy时可能要你输入username和password。</p>
+<p>得到下图就说明部署成功了，过一会儿就可以在<code>http://yourname.github.io</code> 这个网站看到你的博客了！！</p>
+<p><img src="https://pic4.zhimg.com/80/v2-8fb2b2026aa0a748594642bb0f53f72b_1440w.webp" alt="img"></p>
+<h2 id="7-设置个人域名"><a href="#7-设置个人域名" class="headerlink" title="7. 设置个人域名"></a><strong>7. 设置个人域名</strong></h2><p>现在你的个人网站的地址是 <code>yourname.github.io</code>，如果觉得这个网址逼格不太够，这就需要你设置个人域名了。但是需要花钱。</p>
+<p>注册一个阿里云账户,在<a href="https://link.zhihu.com/?target=https://wanwang.aliyun.com/?spm=5176.8142029.digitalization.2.e9396d3e46JCc5">阿里云</a>上买一个域名，我买的是 <code>fangzh.top</code>，各个后缀的价格不太一样，比如最广泛的.com就比较贵，看个人喜好咯。</p>
+<p>你需要先去进行实名认证,然后在域名控制台中，看到你购买的域名。</p>
+<p>点<strong>解析</strong>进去，添加解析。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-11ace56a64930bf2e997aad3618f548e_1440w.webp" alt="img"></p>
+<p>其中，192.30.252.153 和 192.30.252.154 是GitHub的服务器地址。 <strong>注意，解析线路选择默认</strong>，不要像我一样选境外。这个境外是后面来做国内外分流用的,在后面的博客中会讲到。记得现在选择<strong>默认</strong>！！</p>
+<p><img src="https://pic4.zhimg.com/80/v2-e572fb0a5de7519d606e80c49829f40f_1440w.webp" alt="img"></p>
+<p>登录GitHub，进入之前创建的仓库，点击settings，设置Custom domain，输入你的域名<code>fangzh.top</code></p>
+<p><img src="https://pic2.zhimg.com/80/v2-b75ea5d443b68a8600601e596553ad09_1440w.webp" alt="img"></p>
+<p>然后在你的博客文件source中创建一个名为CNAME文件，不要后缀。写上你的域名。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-1b974b97c26a5a9ff27d973f31d804b3_1440w.webp" alt="img"></p>
+<p>最后，在gitbash中，输入</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>过不了多久，再打开你的浏览器，输入你自己的域名，就可以看到搭建的网站啦！</p>
+<p>接下来你就可以正式开始写文章了。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new newpapername</span><br></pre></td></tr></table></figure>
+
+<p>然后在source&#x2F;_post中打开markdown文件，就可以开始编辑了。当你写完的时候，再</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a><strong>第二部分</strong></h2><p>hexo的基本配置，更换主题，实现多终端工作，以及在coding page部署实现国内外分流。</p>
+<h2 id="1-hexo基本配置"><a href="#1-hexo基本配置" class="headerlink" title="1. hexo基本配置"></a><strong>1. hexo基本配置</strong></h2><p>在文件根目录下的<code>_config.yml</code>，就是整个hexo框架的配置文件了。可以在里面修改大部分的配置。详细可参考<a href="https://link.zhihu.com/?target=https://hexo.io/zh-cn/docs/configuration">官方的配置</a>描述。</p>
+<h2 id="网站"><a href="#网站" class="headerlink" title="网站"></a><strong>网站</strong></h2><p><strong>参数描述</strong><code>title</code>网站标题<code>subtitle</code>网站副标题<code>description</code>网站描述<code>author</code>您的名字<code>language</code>网站使用的语言<code>timezone</code>网站时区。Hexo 默认使用您电脑的时区。<a href="https://link.zhihu.com/?target=https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">时区列表</a>。比如说：<code>America/New_York</code>, <code>Japan</code>, 和 <code>UTC</code> 。</p>
+<p>其中，<code>description</code>主要用于SEO，告诉搜索引擎一个关于您站点的简单描述，通常建议在其中包含您网站的关键词。<code>author</code>参数用于主题显示文章的作者。</p>
+<h2 id="网址"><a href="#网址" class="headerlink" title="网址"></a><strong>网址</strong></h2><p><strong>参数描述</strong><code>url</code>网址<code>root</code>网站根目录<code>permalink</code>文章的 <a href="https://link.zhihu.com/?target=https://hexo.io/zh-cn/docs/permalinks">永久链接</a> 格式<code>permalink_defaults</code>永久链接中各部分的默认值</p>
+<p>在这里，你需要把<code>url</code>改成你的网站域名。</p>
+<p>permalink，也就是你生成某个文章时的那个链接格式。</p>
+<p>比如我新建一个文章叫<code>temp.md</code>，那么这个时候他自动生成的地址就是<code>http://yoursite.com/2018/09/05/temp</code>。</p>
+<p>以下是官方给出的示例，关于链接的变量还有很多，需要的可以去官网上查找 <a href="https://link.zhihu.com/?target=https://hexo.io/zh-cn/docs/permalinks">永久链接</a> 。</p>
+<p><strong>参数结果</strong><code>:year/:month/:day/:title/</code>2013&#x2F;07&#x2F;14&#x2F;hello-world<code>:year-:month-:day-:title.html</code>2013-07-14-hello-world.html<code>:category/:title</code>foo&#x2F;bar&#x2F;hello-world</p>
+<p>再往下翻，中间这些都默认就好了。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">theme: landscape</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: &lt;repository url&gt;</span><br><span class="line">  branch: [branch]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>theme</code>就是选择什么主题，也就是在<code>theme</code>这个文件夹下，在官网上有很多个主题，默认给你安装的是<code>lanscape</code>这个主题。当你需要更换主题时，在官网上下载，把主题的文件放在<code>theme</code>文件夹下，再修改这个参数就可以了。</p>
+<p>接下来这个<code>deploy</code>就是网站的部署的，<code>repo</code>就是仓库(<code>Repository</code>)的简写。<code>branch</code>选择仓库的哪个分支。这个在之前进行github page部署的时候已经修改过了，不再赘述。而这个在后面进行双平台部署的时候会再次用到。</p>
+<h2 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a><strong>Front-matter</strong></h2><p>Front-matter 是文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量，举例来说：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: Hello World</span><br><span class="line">date: 2013/7/13 20:46:25</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>下是预先定义的参数，您可在模板中使用这些参数值并加以利用。</p>
+<p><strong>参数描述</strong><code>layout</code>布局<code>title</code>标题<code>date</code>建立日期<code>updated</code>更新日期<code>comments</code>开启文章的评论功能<code>tags</code>标签（不适用于分页）<code>categories</code>分类（不适用于分页）<code>permalink</code>覆盖文章网址</p>
+<p>其中，分类和标签需要区别一下，分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">categories:</span><br><span class="line">- Diary</span><br><span class="line">tags:</span><br><span class="line">- PS3</span><br><span class="line">- Games</span><br></pre></td></tr></table></figure>
+
+<h2 id="layout（布局）"><a href="#layout（布局）" class="headerlink" title="layout（布局）"></a><strong>layout（布局）</strong></h2><p>当你每一次使用代码</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new paper</span><br></pre></td></tr></table></figure>
+
+<p>它其实默认使用的是<code>post</code>这个布局，也就是在<code>source</code>文件夹下的<code>_post</code>里面。</p>
+<p>Hexo 有三种默认布局：<code>post</code>、<code>page</code> 和 <code>draft</code>，它们分别对应不同的路径，而您自定义的其他布局和 <code>post</code> 相同，都将储存到 <code>source/_posts</code> 文件夹。</p>
+<p><strong>布局路径</strong><code>postsource/_postspagesourcedraftsource/_drafts</code></p>
+<p>而new这个命令其实是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+
+<p>只不过这个layout默认是post罢了。</p>
+<h2 id="page"><a href="#page" class="headerlink" title="page"></a><strong>page</strong></h2><p>如果你想另起一页，那么可以使用</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page board</span><br></pre></td></tr></table></figure>
+
+<p>系统会自动给你在source文件夹下创建一个board文件夹，以及board文件夹中的index.md，这样你访问的board对应的链接就是<code>http://xxx.xxx/board</code></p>
+<h2 id="draft"><a href="#draft" class="headerlink" title="draft"></a><strong>draft</strong></h2><p>draft是草稿的意思，也就是你如果想写文章，又不希望被看到，那么可以</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new draft newpage</span><br></pre></td></tr></table></figure>
+
+<p>这样会在source&#x2F;_draft中新建一个newpage.md文件，如果你的草稿文件写的过程中，想要预览一下，那么可以使用</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server --draft</span><br></pre></td></tr></table></figure>
+
+<p>在本地端口中开启服务预览。</p>
+<p>如果你的草稿文件写完了，想要发表到post中，</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo publish draft newpage</span><br></pre></td></tr></table></figure>
+
+<p>就会自动把newpage.md发送到post中。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://beiliu266.github.io/2023/12/08/Hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%B8%8A%E4%BC%A0%E8%BF%87%E7%A8%8B/" data-id="clpwbxkle0000p4vw4csogm4h" data-title="Hexo的搭建及上传过程" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-多表查询" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/12/08/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/" class="article-date">
+  <time class="dt-published" datetime="2023-12-08T06:33:33.000Z" itemprop="datePublished">2023-12-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/12/08/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">多表查询</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://beiliu266.github.io/2023/12/08/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/" data-id="clpwbxklj0002p4vw4j0j38g6" data-title="多表查询" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -108,7 +723,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/12/08/hello-world/" data-id="clpw33u3s0000e8vw65ybe8bb" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://beiliu266.github.io/2023/12/08/hello-world/" data-id="clpwbxklk0003p4vw483v5sqk" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -136,9 +751,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li></ul>
     </div>
   </div>
 
@@ -146,12 +761,28 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2023/12/08/hello-world/">Hello World</a>
+            <a href="/2023/12/08/%E8%A7%A3%E5%86%B3GitHub%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/">解决GitHub访问慢或者无法访问</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/08/Typora%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">Typora基本语法指南</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/08/Typora%E6%8F%92%E5%85%A5%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F/">Typora插入主题样式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/08/Hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%B8%8A%E4%BC%A0%E8%BF%87%E7%A8%8B/">Hexo的搭建及上传过程</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/08/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">多表查询</a>
           </li>
         
       </ul>
