@@ -1,250 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>解决GitHub访问慢或者无法访问 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="本地网络访问慢，科学上网速度很快本地网络无法访问（响应时间过长导致无法访问）由于github的加速分发CDN域名assets-cdn.github.com遭到DNS污染，无法访问 1.修改本地hosts映射域名解析直接指向GitHub的IP地址，以此来绕过DNS解析 1.1 查看最新GitHub 的最新ip地址在 ip地址查询 网站中查询GitHub相关的网站对应的最新IP地址 github.co">
-<meta property="og:type" content="article">
-<meta property="og:title" content="解决GitHub访问慢或者无法访问">
-<meta property="og:url" content="https://beiliu266.github.io/2023/12/08/%E8%A7%A3%E5%86%B3GitHub%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="本地网络访问慢，科学上网速度很快本地网络无法访问（响应时间过长导致无法访问）由于github的加速分发CDN域名assets-cdn.github.com遭到DNS污染，无法访问 1.修改本地hosts映射域名解析直接指向GitHub的IP地址，以此来绕过DNS解析 1.1 查看最新GitHub 的最新ip地址在 ip地址查询 网站中查询GitHub相关的网站对应的最新IP地址 github.co">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-12-08T07:47:33.197Z">
-<meta property="article:modified_time" content="2023-12-08T07:34:18.354Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+extends includes/layout.pug
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+block content
+  #post
+    if top_img === false
+      include includes/header/post-info.pug
 
-  
-  
-<meta name="generator" content="Hexo 7.0.0"></head>
+    article#article-container.post-content!=page.content
+    include includes/post/post-copyright.pug
+    .tag_share
+      if (theme.post_meta.post.tags)
+        .post-meta__tag-list
+          each item, index in page.tags.data
+            a(href=url_for(item.path)).post-meta__tags #[=item.name]
+      include includes/third-party/share/index.pug
+        
+    if theme.reward.enable && theme.reward.QR_code
+      !=partial('includes/post/reward', {}, {cache: true})
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+    //- ad
+    if theme.ad && theme.ad.post
+      .ads-wrap!=theme.ad.post
+
+    if theme.post_pagination
+      include includes/pagination.pug
+    if theme.related_post && theme.related_post.enable
+      != related_posts(page,site.posts)
+
+    if page.comments !== false && theme.comments && theme.comments.use
+      - var commentsJsLoad = true
+      !=partial('includes/third-party/comments/index', {}, {cache: true})
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://beiliu266.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-解决GitHub访问速度慢的问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/12/08/%E8%A7%A3%E5%86%B3GitHub%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
-  <time class="dt-published" datetime="2023-12-08T07:47:33.197Z" itemprop="datePublished">2023-12-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      解决GitHub访问慢或者无法访问
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>本地网络访问慢，科学上网速度很快<br>本地网络无法访问（响应时间过长导致无法访问）<br>由于github的加速分发CDN域名assets-cdn.github.com遭到DNS污染，无法访问</p>
-<p>1.修改本地hosts映射<br>域名解析直接指向GitHub的IP地址，以此来绕过DNS解析</p>
-<p>1.1 查看最新GitHub 的最新ip地址<br>在 ip地址查询 网站中查询GitHub相关的网站对应的最新IP地址</p>
-<p>github.com<br>github.global.ssl.fastly.net<br>assets-cdn.github.com<br>codeload.github.com<br>在当前网站中查询指定网站ip地址还可以使用另外方法:</p>
-<p>①直接将网站作为参数进行请求，省略点击查询的步骤：</p>
-<p><a target="_blank" rel="noopener" href="https://websites.ipaddress.com/github.global.ssl.fastly.net">https://websites.ipaddress.com/github.global.ssl.fastly.net</a><br><a target="_blank" rel="noopener" href="https://websites.ipaddress.com/github.com">https://websites.ipaddress.com/github.com</a><br><a target="_blank" rel="noopener" href="https://websites.ipaddress.com/assets-cdn.github.com">https://websites.ipaddress.com/assets-cdn.github.com</a><br><a target="_blank" rel="noopener" href="https://websites.ipaddress.com/codeload.github.com">https://websites.ipaddress.com/codeload.github.com</a><br>②将ip查询网站拼接在之后进行查询</p>
-<p><a target="_blank" rel="noopener" href="http://github.global.ssl.fastly.net.ipaddress.com/">http://github.global.ssl.fastly.net.ipaddress.com/</a><br><a target="_blank" rel="noopener" href="https://github.com.ipaddress.com/">https://github.com.ipaddress.com/</a><br><a target="_blank" rel="noopener" href="https://assets-cdn.github.com.ipaddress.com/">https://assets-cdn.github.com.ipaddress.com/</a><br><a target="_blank" rel="noopener" href="https://codeload.github.com.ipaddress.com/">https://codeload.github.com.ipaddress.com/</a><br>1.2 本地hosts文件映射ip地址<br>    找到对应的IP地址后，将IP地址与网站地址进行对应，并将对应关系写入本地hosts文件中。</p>
-<p>​    在windows系统中的C:\Windows\System32\drivers\etc下找到hosts文件，编辑打开，将四个网站的IP地址和网站地址对应写入进入，作为DNS的映射。</p>
-<p>​    hosts文件直接编辑修改时可能没有权限，可以通过以下方法完成修改：</p>
-<p>​        修改当前文件权限，右键hosts文件 -&gt; 属性 -&gt; 安全 -&gt; 编辑 -&gt; Users -&gt; Users的权限后加入写权限<br>​		将当前文件复制到别的盘中，修改文件后复制回来覆盖原来文件<br>#github dns映射 格式如：  [ip]: [domainName]<br>199.232.69.194 github.global.ssl.Fastly.net<br>140.82.114.4 GitHub.com<br>185.199.108.153 assets-cdn.Github.com<br>140.82.114.9 codeload.Github.com</p>
-<p>(  例如：</p>
-<p>20.205.243.166        github.com</p>
-<p>GitHub Start</p>
-<p>140.82.114.4 github.com<br>199.232.69.194 github.global.ssl.fastly.net</p>
-<p>GitHub End)</p>
-<p>1.3 刷新DNS缓存来访问新的映射<br>hosts文件内容更新成功后，还需要刷新windows系统的DNS才可以生效。</p>
-<p>使用 win+R ，打开cmd命令行，输入 ipconfig&#x2F;flushdns 刷新DNS缓存即可。</p>
-<p>刷新完成后，再次打开github网站时速度会明显提升，需要注意的是以上github网站的ip经常发生变化，如果访问再次变慢可以重新更新映射信息。</p>
-<ol start="2">
-<li>一键更新<br>手动更新本地hosts文件的方式比较繁琐，我们可以编写程序来代替手动操作，实现需要时hosts文件内容的一键更新。</li>
-</ol>
-<p>2.1 利用开源项目<br>推荐一个 github 开源项目：更新hosts ，作者会每日提供最新的相关 ip 地址映射信息，我们可以直接复制使用或者使用其中的程序进行一键更新操作。</p>
-<p>作为一个coder，我们也可以自己去实现一个脚本程序。</p>
-<ol start="3">
-<li>Chrome插件<br>chrome 插件如 github 加速 等，可以实现在访问和下载项目时使用镜像加速，提升访问速度。</li>
-</ol>
-<p>如果无法访问chrome下载插件，推荐一个好用的chrome插件下载网站：CrxDL.COM ，下载后使用开发者模式安装插件即可使用。</p>
-<p>更多 chrome 插件安装使用方法参考文档：chrome 插件食用指南！</p>
-<ol start="4">
-<li>镜像网站<br>github访问速度慢，我们还可以使用镜像网站来代替github</li>
-</ol>
-<p><a target="_blank" rel="noopener" href="https://hub.njuu.cf/search">https://hub.njuu.cf/search</a><br><a target="_blank" rel="noopener" href="https://www.gitclone.com/gogs/search/clonesearch">https://www.gitclone.com/gogs/search/clonesearch</a><br>以上网站作为镜像网站，基本包含了github上已有的项目信息，并且可以查看和下载相关项目，速度还不错，可以作为备用网站使用。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://beiliu266.github.io/2023/12/08/%E8%A7%A3%E5%86%B3GitHub%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" data-id="clpwpzt5c0004rovw2yfz9e6o" data-title="解决GitHub访问慢或者无法访问" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2023/12/08/Typora%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">Typora基本语法指南</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2023/12/08/%E8%A7%A3%E5%86%B3GitHub%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/">解决GitHub访问慢或者无法访问</a>
-          </li>
-        
-          <li>
-            <a href="/2023/12/08/Typora%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">Typora基本语法指南</a>
-          </li>
-        
-          <li>
-            <a href="/2023/12/08/Typora%E6%8F%92%E5%85%A5%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F/">Typora插入主题样式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/12/08/Hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%B8%8A%E4%BC%A0%E8%BF%87%E7%A8%8B/">Hexo的搭建及上传过程</a>
-          </li>
-        
-          <li>
-            <a href="/2023/12/08/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">多表查询</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2023 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"live2d-widget-model-chitose"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-</html>
