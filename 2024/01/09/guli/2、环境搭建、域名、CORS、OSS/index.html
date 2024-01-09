@@ -1,0 +1,671 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. 谷粒商城介绍1.1. 项目分类主要从需求方、盈利模式、技术侧重点这三个方面来看它们的不同 1.1.1. 传统项目各种企业里面用的管理系统（ERP、HR、OA、CRM、物流管理系统。。。。。。。）  需求方：公司、企业内部  盈利模式：项目本身卖钱  技术侧重点：业务功能   1.1.2. 互联网项目门户网站、电商网站：baidu.com、qq.com、taobao.com、jd.com  …">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://beiliu266.github.io/2024/01/09/guli/2%E3%80%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81%E5%9F%9F%E5%90%8D%E3%80%81CORS%E3%80%81OSS/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. 谷粒商城介绍1.1. 项目分类主要从需求方、盈利模式、技术侧重点这三个方面来看它们的不同 1.1.1. 传统项目各种企业里面用的管理系统（ERP、HR、OA、CRM、物流管理系统。。。。。。。）  需求方：公司、企业内部  盈利模式：项目本身卖钱  技术侧重点：业务功能   1.1.2. 互联网项目门户网站、电商网站：baidu.com、qq.com、taobao.com、jd.com  …">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-01-09T12:30:18.794Z">
+<meta property="article:modified_time" content="2020-07-01T02:35:04.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://beiliu266.github.io/2024/01/09/guli/2%E3%80%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81%E5%9F%9F%E5%90%8D%E3%80%81CORS%E3%80%81OSS/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-07-01 10:35:04'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Hexo"><span class="site-name">Hexo</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-09T12:30:18.794Z" title="发表于 2024-01-09 20:30:18">2024-01-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-07-01T02:35:04.000Z" title="更新于 2020-07-01 10:35:04">2020-07-01</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="1-谷粒商城介绍"><a href="#1-谷粒商城介绍" class="headerlink" title="1. 谷粒商城介绍"></a>1. 谷粒商城介绍</h1><h2 id="1-1-项目分类"><a href="#1-1-项目分类" class="headerlink" title="1.1. 项目分类"></a>1.1. 项目分类</h2><p>主要从需求方、盈利模式、技术侧重点这三个方面来看它们的不同</p>
+<h3 id="1-1-1-传统项目"><a href="#1-1-1-传统项目" class="headerlink" title="1.1.1. 传统项目"></a>1.1.1. 传统项目</h3><p>各种企业里面用的管理系统（ERP、HR、OA、CRM、物流管理系统。。。。。。。）</p>
+<ul>
+<li><p>需求方：公司、企业内部</p>
+</li>
+<li><p>盈利模式：项目本身卖钱</p>
+</li>
+<li><p>技术侧重点：业务功能</p>
+</li>
+</ul>
+<h3 id="1-1-2-互联网项目"><a href="#1-1-2-互联网项目" class="headerlink" title="1.1.2. 互联网项目"></a>1.1.2. 互联网项目</h3><p>门户网站、电商网站：baidu.com、qq.com、taobao.com、jd.com  …… </p>
+<ul>
+<li>需求方：广大用户群体</li>
+<li>盈利模式：虚拟币、增值服务、广告收益……</li>
+<li>技术侧重点：网站性能、业务功能</li>
+</ul>
+<p>而我们今天要聊的就是互联网项目中的重要角色：电商</p>
+<h2 id="1-2-为什么我们要讲电商？"><a href="#1-2-为什么我们要讲电商？" class="headerlink" title="1.2. 为什么我们要讲电商？"></a>1.2. 为什么我们要讲电商？</h2><p>因为就互联网平台来说，电商网站有很多典型的特征：</p>
+<ul>
+<li>访问量大</li>
+<li>数据量大</li>
+<li>有一定的业务复杂性</li>
+<li>涉及支付 考虑一定安全性</li>
+</ul>
+<h2 id="1-3-电商行业的发展"><a href="#1-3-电商行业的发展" class="headerlink" title="1.3. 电商行业的发展"></a>1.3. 电商行业的发展</h2><h3 id="1-3-1-钱景"><a href="#1-3-1-钱景" class="headerlink" title="1.3.1. 钱景"></a>1.3.1. 钱景</h3><p>近年来，中国的电子商务快速发展，交易额连创新高，电子商务在各领域的应用不断拓展和深化、相关服务业蓬勃发展、支撑体系不断健全完善、创新的动力和能力不断增强。电子商务正在与实体经济深度融合，进入规模性发展阶段，对经济社会生活的影响不断增大，正成为我国经济发展的新引擎。</p>
+<p>中国电子商务研究中心数据显示，截止到 2012 年底，中国电子商务市场交易规模达 7.85万亿人民币，同比增长 30.83%。其中，B2B 电子商务交易额达 6.25 万亿，同比增长 27%。而 2011 年全年，中国电子商务市场交易额达 6 万亿人民币，同比增长 33%，占 GDP 比重上升到 13%；2012 年，电子商务占 GDP 的比重已经高达 15%。</p>
+<p> <img src="/assets/1525686041466.png"></p>
+<h3 id="1-3-2-数据"><a href="#1-3-2-数据" class="headerlink" title="1.3.2. 数据"></a>1.3.2. 数据</h3><p><img src="/assets/timg.jfif" alt="img"></p>
+<p>来看看双十一的成交数据：</p>
+<p><img src="/assets/timg-1565828244649.jfif" alt="img"></p>
+<p><img src="/assets/1525686160411.png" alt="1525686160411"></p>
+<p>2016双11开场30分钟，创造<strong>每秒交易峰值17.5万笔</strong>，<strong>每秒</strong>支付峰值<strong>12万笔</strong>的新纪录。菜鸟单日物流订单量超过<strong>4.67亿</strong>，创历史新高。</p>
+<p>2017阿里双11交易创建峰值 32.5 万笔／秒，支付峰值达到每秒25.6万笔。支付宝每秒处理4200万次请求。</p>
+<p>2018年天猫双11<strong>每秒订单创建峰值49.1万笔</strong>。全天<strong>实时计算处理峰值达到每秒17.18亿条</strong>，强大技术能力保障了双11购物如丝般顺滑。消费者手指轻点下单的这一秒钟里，光是计算环节，就包括至少7个系统的运转。这对阿里巴巴来说，意味着单位时间内全球最大的多维度计算量。提交订单的环节，一个页面里，背后包括商品、价格、营销、资金、零库存、限购数、物流等，这些都在考核后台的计算能力。目前，在全球范围内都没有其他任何一个商业机构能在1秒钟内处理这么大的交易计算量。</p>
+<h2 id="1-4-常见电商模式"><a href="#1-4-常见电商模式" class="headerlink" title="1.4. 常见电商模式"></a>1.4. 常见电商模式</h2><p>电商行业的一些常见模式：</p>
+<ul>
+<li>B2C：商家对个人，如：亚马逊、当当等</li>
+<li>C2C平台：个人对个人，如：闲鱼、拍拍网、ebay</li>
+<li>B2B平台：商家对商家，如：阿里巴巴、八方资源网等</li>
+<li>O2O：线上和线下结合，如：饿了么、电影票、团购等</li>
+<li>P2P：在线金融，贷款，如：网贷之家、人人聚财等。</li>
+<li>B2C平台：天猫、京东、一号店等</li>
+</ul>
+<h1 id="2-搭建项目"><a href="#2-搭建项目" class="headerlink" title="2. 搭建项目"></a>2. 搭建项目</h1><h2 id="2-1-项目结构说明"><a href="#2-1-项目结构说明" class="headerlink" title="2.1. 项目结构说明"></a>2.1. 项目结构说明</h2><p><img src="/assets/1565830474055.png" alt="1565830474055"></p>
+<p>核心是microservice这块儿，它分两类微服务：</p>
+<ul>
+<li><p>后台CRUD微服务</p>
+<ol>
+<li><p>pms：商品管理系统（product） 18081</p>
+</li>
+<li><p>ums：用户管理系统（user）18082</p>
+</li>
+<li><p>wms：仓库管理系统（warehouse） 18083</p>
+</li>
+<li><p>oms：订单管理系统（order）18084</p>
+</li>
+<li><p>sms：营销管理系统（sale） 18085</p>
+<p>。。。。</p>
+</li>
+</ol>
+</li>
+<li><p>前台数据接口微服务</p>
+<ol>
+<li>cart：购物车微服务</li>
+<li>order：订单微服务</li>
+<li>search：搜索微服务</li>
+<li>item：商品详情微服务</li>
+<li>member：会员微服务</li>
+</ol>
+</li>
+</ul>
+<p>第三方微服务：物流、短信、支付、云存储。。。。</p>
+<p>数据层：mysql（分库分表中间件：Mycat）、redis、elasticsearch、activemq&#x2F;rabbitmq、阿里OSS</p>
+<p>后台管理前端：gmall-admin（1000）</p>
+<p>前台门户：gmall-shop （2000）</p>
+<p>网关：gmall-gateway（8888）</p>
+<h2 id="2-2-数据准备"><a href="#2-2-数据准备" class="headerlink" title="2.2. 数据准备"></a>2.2. 数据准备</h2><p>把课前资料中的数据文件导入数据库：</p>
+<p><img src="/assets/1567355328875.png" alt="1567355328875"></p>
+<p>导入数据库之后：</p>
+<p><img src="/assets/1567333267252.png" alt="1567333267252"></p>
+<h2 id="2-3-使用github创建仓库"><a href="#2-3-使用github创建仓库" class="headerlink" title="2.3. 使用github创建仓库"></a>2.3. 使用github创建仓库</h2><p><img src="/assets/1567334008957.png" alt="1567334008957"></p>
+<p><img src="/assets/1567339772175.png" alt="1567339772175"></p>
+<p><img src="/assets/1567339859043.png" alt="1567339859043"></p>
+<p>克隆到本地：</p>
+<p><img src="/assets/1567339951241.png" alt="1567339951241"></p>
+<p>开源协议参考：</p>
+<p><img src="/assets/1567337340281.png" alt="1567337340281"></p>
+<h2 id="2-4-项目初始创建"><a href="#2-4-项目初始创建" class="headerlink" title="2.4. 项目初始创建"></a>2.4. 项目初始创建</h2><p>把课前资料&#x2F;基础工程中的文件</p>
+<p><img src="/assets/1584516375772.png" alt="1584516375772"></p>
+<p>copy到 clone下来的gmall工程中</p>
+<p><img src="/assets/1584516493674.png" alt="1584516493674"></p>
+<p>接下来在idea中导入gmall工程：</p>
+<p> <img src="/assets/1567339273164.png" alt="1567339273164"></p>
+<p> <img src="/assets/1584516638926.png" alt="1584516638926"></p>
+<p>点击“OK”，一路下一步：</p>
+<p>在idea的Terminal窗口，查看git状态：</p>
+<p><img src="/assets/1584516789310.png" alt="1584516789310"></p>
+<p>把.idea&#x2F;和gmall.iml添加到忽略列表：</p>
+<p><img src="/assets/1584516917309.png" alt="1584516917309"></p>
+<p><img src="/assets/1567341727095.png" alt="1567341727095"></p>
+<p>推送到远程仓库：<code>git push origin master</code></p>
+<p><img src="/assets/1567343213635.png" alt="1567343213635"></p>
+<p>效果：</p>
+<p><img src="/assets/1584517089773.png" alt="1584517089773"></p>
+<h2 id="2-5-依赖分析"><a href="#2-5-依赖分析" class="headerlink" title="2.5. 依赖分析"></a>2.5. 依赖分析</h2><p>gmall工程：是父工程，在pom.xml中统一管理了常用依赖的版本号</p>
+<p>gmall-common：包含了通用的实体类及工具类，所有工程都依赖于该common工程</p>
+<p>gmall-admin：后台管理控制台菜单管理系统。此项目不用关注，和业务无关。</p>
+<p>springboot的常用依赖有：</p>
+<ul>
+<li>data-redis</li>
+<li>web</li>
+</ul>
+<p>springCloud的常用依赖有：</p>
+<ul>
+<li>openfeign</li>
+<li>alibaba-nacos-discovery</li>
+<li>alibaba-nacos-config</li>
+<li>alibaba-sentinel</li>
+<li>zipkin等</li>
+</ul>
+<p>需要链接数据库的工程需要引入mybatis相关依赖。</p>
+<h2 id="2-6-创建项目其他模块"><a href="#2-6-创建项目其他模块" class="headerlink" title="2.6. 创建项目其他模块"></a>2.6. 创建项目其他模块</h2><p>任何项目都要依赖common工程。</p>
+<h3 id="2-6-1-创建商品管理模块"><a href="#2-6-1-创建商品管理模块" class="headerlink" title="2.6.1. 创建商品管理模块"></a>2.6.1. 创建商品管理模块</h3><p><img src="/assets/1567345499851.png" alt="1567345499851"></p>
+<p><img src="/assets/1567345461335.png" alt="1567345461335"></p>
+<p><img src="/assets/1567345986612.png" alt="1567345986612"></p>
+<p><img src="/assets/1584519056894.png" alt="1584519056894"></p>
+<p>创建完成：</p>
+<p> <img src="/assets/1584519349474.png" alt="1584519349474"></p>
+<p>需要手动导入的依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.atguigu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>gmall-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>创建springboot工程，默认是以spring-boot-starter-parent为父工程，需要改为gmall为父工程：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.atguigu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>gmall<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>并且把pms工程中的如下springCloud依赖管理去掉：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">spring-cloud-alibaba.version</span>&gt;</span>2.2.0.RELEASE<span class="tag">&lt;/<span class="name">spring-cloud-alibaba.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">spring-cloud.version</span>&gt;</span>Hoxton.SR3<span class="tag">&lt;/<span class="name">spring-cloud.version</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring-cloud.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-alibaba-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring-cloud-alibaba.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-6-2-创建用户管理模块"><a href="#2-6-2-创建用户管理模块" class="headerlink" title="2.6.2. 创建用户管理模块"></a>2.6.2. 创建用户管理模块</h3><p><img src="/assets/1567346794978.png" alt="1567346794978"></p>
+<p>其他项，参考商品管理模块。</p>
+<h3 id="2-6-3-创建订单管理模块"><a href="#2-6-3-创建订单管理模块" class="headerlink" title="2.6.3. 创建订单管理模块"></a>2.6.3. 创建订单管理模块</h3><p><img src="/assets/1567347502480.png" alt="1567347502480"></p>
+<p>其他项参考商品管理模块</p>
+<h3 id="2-6-4-创建营销管理模块"><a href="#2-6-4-创建营销管理模块" class="headerlink" title="2.6.4. 创建营销管理模块"></a>2.6.4. 创建营销管理模块</h3><p><img src="/assets/1567347664944.png" alt="1567347664944"></p>
+<h3 id="2-6-5-创建仓库管理模块"><a href="#2-6-5-创建仓库管理模块" class="headerlink" title="2.6.5. 创建仓库管理模块"></a>2.6.5. 创建仓库管理模块</h3><p><img src="/assets/1567347872743.png" alt="1567347872743"></p>
+<h3 id="2-6-6-完整工程"><a href="#2-6-6-完整工程" class="headerlink" title="2.6.6. 完整工程"></a>2.6.6. 完整工程</h3><p> <img src="/assets/1584521284761.png" alt="1584521284761"></p>
+<p>接下来把这些新模块push到github。</p>
+<p>先添加忽略：</p>
+<p><img src="/assets/1584521413903.png" alt="1584521413903"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;创建后台工程&quot;</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<p><img src="/assets/1584521463705.png" alt="1584521463705"></p>
+<h2 id="2-7-逆向工程生成代码"><a href="#2-7-逆向工程生成代码" class="headerlink" title="2.7. 逆向工程生成代码"></a>2.7. 逆向工程生成代码</h2><p>课前资料&#x2F;逆向工程：</p>
+<p><img src="/assets/1567352524638.png" alt="1567352524638"></p>
+<p>copy到gmall项目下：</p>
+<p><img src="/assets/1584533652973.png" alt="1584533652973"></p>
+<p>回到idea，把逆向工程作为maven工程导入idea</p>
+<p> <img src="/assets/1584533730931.png" alt="1584533730931"></p>
+<p> <img src="/assets/1584533852229.png" alt="1584533852229"></p>
+<p>下面以生成pms的代码为例，其他模块操作类似！！！！！！！</p>
+<h3 id="2-7-1-修改配置"><a href="#2-7-1-修改配置" class="headerlink" title="2.7.1. 修改配置"></a>2.7.1. 修改配置</h3><p>修改application.yml，把数据库及其连接信息改成自己的：</p>
+<p><img src="/assets/1567353516902.png" alt="1567353516902"></p>
+<p>修改generator.properties：</p>
+<p><img src="/assets/1567353654521.png" alt="1567353654521"></p>
+<h3 id="2-7-2-启动逆向工程"><a href="#2-7-2-启动逆向工程" class="headerlink" title="2.7.2. 启动逆向工程"></a>2.7.2. 启动逆向工程</h3><p>启动RenrenApplication：</p>
+<p> <img src="/assets/1567353884488.png" alt="1567353884488"></p>
+<p>启动成功，监听端口号为80。浏览器访问</p>
+<p><img src="/assets/1567354272950.png" alt="1567354272950"></p>
+<p>生成一个压缩包，被下载下来：</p>
+<p><img src="/assets/1567354334616.png" alt="1567354334616"></p>
+<p>即找到压缩包。</p>
+<h3 id="2-7-3-把文件copy到对应工程"><a href="#2-7-3-把文件copy到对应工程" class="headerlink" title="2.7.3. 把文件copy到对应工程"></a>2.7.3. 把文件copy到对应工程</h3><ol>
+<li><p>打开压缩包，压缩包&#x2F;main&#x2F;java下的com目录，copy到gmall-pms模块的src&#x2F;main&#x2F;java：</p>
+<p><img src="/assets/1567354454625.png" alt="1567354454625"></p>
+<p>效果如下：</p>
+<p> <img src="/assets/1584534175887.png" alt="1584534175887"></p>
+</li>
+<li><p>把压缩包&#x2F;main&#x2F;resources下的mapper目录，copy到gmall-pms模块的src&#x2F;java&#x2F;resources目录下：</p>
+<p><img src="/assets/1567354984421.png" alt="1567354984421"></p>
+<p>如下：</p>
+<p> <img src="/assets/1567355365129.png" alt="1567355365129"></p>
+</li>
+</ol>
+<h2 id="2-8-各个模块工程的配置"><a href="#2-8-各个模块工程的配置" class="headerlink" title="2.8. 各个模块工程的配置"></a>2.8. 各个模块工程的配置</h2><p>后台管理模块，每个工程的配置方式基本一样。下面还是以gmall-pms工程为例：</p>
+<h3 id="2-8-1-工程参数配置"><a href="#2-8-1-工程参数配置" class="headerlink" title="2.8.1. 工程参数配置"></a>2.8.1. 工程参数配置</h3><p>application.yml配置文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">18081</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">discovery:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8848</span></span><br><span class="line">    <span class="attr">sentinel:</span></span><br><span class="line">      <span class="attr">transport:</span></span><br><span class="line">        <span class="attr">dashboard:</span> <span class="string">localhost:8080</span></span><br><span class="line">        <span class="attr">port:</span> <span class="number">8719</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://172.16.116.100:3306/guli_pms?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">172.16</span><span class="number">.116</span><span class="number">.100</span></span><br><span class="line">  <span class="attr">zipkin:</span></span><br><span class="line">    <span class="attr">base-url:</span> <span class="string">http://localhost:9411</span></span><br><span class="line">    <span class="attr">discovery-client-enabled:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">sender:</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">web</span></span><br><span class="line">  <span class="attr">sleuth:</span></span><br><span class="line">    <span class="attr">sampler:</span></span><br><span class="line">      <span class="attr">probability:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/pms/*.xml</span>  <span class="comment"># 读取映射文件</span></span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.atguigu.gmall.pms.entity</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">auto</span>  <span class="comment"># 默认使用数据库自增</span></span><br><span class="line"><span class="attr">feign:</span></span><br><span class="line">  <span class="attr">sentinel:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>bootstrap.yml配置文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">pms-service</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">config:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8848</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-8-2-在引导类上添加注解"><a href="#2-8-2-在引导类上添加注解" class="headerlink" title="2.8.2. 在引导类上添加注解"></a>2.8.2. 在引导类上添加注解</h3><p>在gmall-pms工程的引导类（GmallPmsApplication）上添加注解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@MapperScan(basePackages = &quot;com.atguigu.gmall.pms.mapper&quot;)</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GmallPmsApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(GmallPmsApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>使用mybatis-plus步骤：</strong></p>
+<ol>
+<li><strong>配置文件中引入映射文件</strong></li>
+<li><strong>在引导类上添加@MapperScan扫描所有mapper&#x2F;dao接口</strong></li>
+<li><strong>编写mapper接口实现BaseMapper<T>即可</strong></li>
+<li><strong>编写service接口继承IService<T>，编写xxxService继承ServiceImpl&lt;Mapper,  Entity&gt;</strong></li>
+<li><strong>查询分页要添加分页过滤器：</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MybatisPlusConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> PaginationInterceptor <span class="title function_">paginationInterceptor</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">PaginationInterceptor</span> <span class="variable">paginationInterceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PaginationInterceptor</span>();</span><br><span class="line">        <span class="comment">// 设置请求的页面大于最大页后操作， true调回到首页，false 继续请求  默认false</span></span><br><span class="line">        <span class="comment">// paginationInterceptor.setOverflow(false);</span></span><br><span class="line">        <span class="comment">// 设置最大单页限制数量，默认 500 条，-1 不受限制</span></span><br><span class="line">        <span class="comment">// paginationInterceptor.setLimit(500);</span></span><br><span class="line">        <span class="comment">// 开启 count 的 join 优化,只针对部分 left join</span></span><br><span class="line">        paginationInterceptor.setCountSqlParser(<span class="keyword">new</span> <span class="title class_">JsqlParserCountOptimize</span>(<span class="literal">true</span>));</span><br><span class="line">        <span class="keyword">return</span> paginationInterceptor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-8-3-配置到nacos"><a href="#2-8-3-配置到nacos" class="headerlink" title="2.8.3. 配置到nacos"></a>2.8.3. 配置到nacos</h3><p>创建名称空间：</p>
+<p><img src="/assets/1567391643890.png" alt="1567391643890"></p>
+<p>给pms添加配置：</p>
+<p><img src="/assets/1567391685012.png" alt="1567391685012"></p>
+<p>修改bootstrap.yml配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">pms-service</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">config:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8848</span></span><br><span class="line">        <span class="attr">namespace:</span> <span class="string">3aeaadb8-203f-44a1-a384-af429c486c0a</span></span><br><span class="line">        <span class="attr">group:</span> <span class="string">dev</span></span><br><span class="line">        <span class="attr">file-extension:</span> <span class="string">yml</span>  <span class="comment"># 默认找服务名.properties文件</span></span><br></pre></td></tr></table></figure>
+
+<p>在GmallPmsApplication类上添加@RefreshScope注解：</p>
+<p><img src="/assets/1567393477982.png" alt="1567393477982"></p>
+<h2 id="2-9-参照PMS完成其他管理模块"><a href="#2-9-参照PMS完成其他管理模块" class="headerlink" title="2.9. 参照PMS完成其他管理模块"></a>2.9. 参照PMS完成其他管理模块</h2><p>其他模块都按照gmall-pms的方式完成搭建。</p>
+<p>所有后台管理模块，都需要完成以下操作：</p>
+<ol>
+<li><p>逆向工程，copy生成的java文件及映射文件到对应的目录下</p>
+</li>
+<li><p>在pom.xml中配置父工程、去掉springCloud的版本管理、引入common工程及mybatis mysql的依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 所有后续创建的工程以该工程为父工程 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.atguigu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>gmall<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 添加common及mybatis mysql依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.atguigu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>gmall-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 最后别忘了去掉springCloud的依赖管理，使用gmall父工程的依赖管理 --&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加application.yml配置，建议把该配置放到nacos中。例如：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">18081</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">discovery:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8848</span></span><br><span class="line">    <span class="attr">sentinel:</span></span><br><span class="line">      <span class="attr">transport:</span></span><br><span class="line">        <span class="attr">dashboard:</span> <span class="string">localhost:8080</span></span><br><span class="line">        <span class="attr">port:</span> <span class="number">8719</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://172.16.116.100:3306/guli_pms?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">172.16</span><span class="number">.116</span><span class="number">.100</span></span><br><span class="line">  <span class="attr">zipkin:</span></span><br><span class="line">    <span class="attr">base-url:</span> <span class="string">http://localhost:9411</span></span><br><span class="line">    <span class="attr">discovery-client-enabled:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">sender:</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">web</span></span><br><span class="line">  <span class="attr">sleuth:</span></span><br><span class="line">    <span class="attr">sampler:</span></span><br><span class="line">      <span class="attr">probability:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/pms/*.xml</span>  <span class="comment"># 读取映射文件</span></span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.atguigu.gmall.pms.entity</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">auto</span>  <span class="comment"># 默认使用数据库自增</span></span><br><span class="line"><span class="attr">feign:</span></span><br><span class="line">  <span class="attr">sentinel:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：不同模块需要修改server.port、spring.datasource.url以及mybatis-plus相关的值</strong></p>
+</li>
+<li><p>添加bootstrap.yml配置，例如：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">pms-service</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">config:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8848</span></span><br><span class="line">        <span class="attr">namespace:</span> <span class="string">3aeaadb8-203f-44a1-a384-af429c486c0a</span></span><br><span class="line">        <span class="attr">group:</span> <span class="string">dev</span></span><br><span class="line">        <span class="attr">file-extension:</span> <span class="string">yml</span>  <span class="comment"># 默认找服务名.properties文件</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：不同模块需要修改spring.application.name及spring.cloud.nacos.config.namespace的值</strong></p>
+</li>
+<li><p>给引导类添加注解，例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@MapperScan(basePackages = &quot;com.atguigu.gmall.pms.mapper&quot;)</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span></span><br><span class="line"><span class="meta">@RefreshScope</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GmallXxxApplication</span> &#123;</span><br><span class="line">    .....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：需要修改basePackages的值</strong></p>
+</li>
+</ol>
+<h2 id="2-10-搭建网关服务"><a href="#2-10-搭建网关服务" class="headerlink" title="2.10. 搭建网关服务"></a>2.10. 搭建网关服务</h2><p><strong>nacos容器内的所有服务，可以直接相互访问。nacos外的服务，为了保证安全，必须通过网关访问后台各个管理模块</strong></p>
+<p><img src="/assets/1567394311232.png" alt="1567394311232"></p>
+<p><img src="/assets/1585635705608.png" alt="1585635705608"></p>
+<p>pom.xml:</p>
+<p>这里也要以gmall父工程为父，去掉cloud及alibaba版本号管理。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.atguigu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>gmall<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.atguigu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>gmall-gateway<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>gmall-gateway<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Demo project for Spring Boot<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-gateway<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.junit.vintage<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit-vintage-engine<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>添加配置：</p>
+<p> <img src="/assets/1567395922784.png" alt="1567395922784"></p>
+<p>bootstrap.yml配置如下：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">gateway-api</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">config:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8848</span></span><br></pre></td></tr></table></figure>
+
+<p>application.yml配置如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8888</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">discovery:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8848</span></span><br><span class="line">    <span class="attr">gateway:</span></span><br><span class="line">      <span class="attr">routes:</span> </span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">pms-route</span> <span class="comment"># 商品管理路由</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">lb://pms-service</span></span><br><span class="line">          <span class="attr">predicates:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Path=/pms/**</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">oms-route</span> <span class="comment"># 订单管理路由</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">lb://oms-service</span></span><br><span class="line">          <span class="attr">predicates:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Path=/oms/**</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">ums-route</span> <span class="comment"># 用户管理路由</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">lb://ums-service</span></span><br><span class="line">          <span class="attr">predicates:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Path=/ums/**</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">wms-route</span> <span class="comment"># 仓库管理路由</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">lb://wms-service</span></span><br><span class="line">          <span class="attr">predicates:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Path=/wms/**</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">sms-route</span> <span class="comment"># 营销管理路由</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">lb://sms-service</span></span><br><span class="line">          <span class="attr">predicates:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Path=/sms/**</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>测试：</p>
+<p><img src="/assets/1567404703573.png" alt="1567404703573"></p>
+<h1 id="3-通过域名访问"><a href="#3-通过域名访问" class="headerlink" title="3. 通过域名访问"></a>3. 通过域名访问</h1><h2 id="3-1-统一环境"><a href="#3-1-统一环境" class="headerlink" title="3.1. 统一环境"></a>3.1. 统一环境</h2><p>我们现在访问页面使用的是：<a target="_blank" rel="noopener" href="http://localhost:8888/">http://localhost:8888</a></p>
+<p>有没有什么问题？</p>
+<p>实际开发中，会有不同的环境：</p>
+<ul>
+<li>开发环境：自己的电脑</li>
+<li>测试环境：提供给测试人员使用的环境</li>
+<li>预发布环境：数据是和生成环境的数据一致，运行最新的项目代码进去测试</li>
+<li>生产环境：项目最终发布上线的环境</li>
+</ul>
+<p>如果不同环境使用不同的ip去访问，可能会出现一些问题。为了保证所有环境的一致，我们会在各种环境下都使用域名来访问。</p>
+<p>我们将使用以下域名：</p>
+<ul>
+<li>主域名是：gmall.com </li>
+<li>管理系统域名：manage.gmall.com</li>
+<li>网关域名：api.gmall.com</li>
+<li>…</li>
+</ul>
+<p>但是最终，我们希望这些域名指向的还是我们本机的某个端口。</p>
+<p>那么，当我们在浏览器输入一个域名时，浏览器是如何找到对应服务的ip和端口的呢？</p>
+<h2 id="3-2-域名解析"><a href="#3-2-域名解析" class="headerlink" title="3.2. 域名解析"></a>3.2. 域名解析</h2><p>一个域名一定会被解析为一个或多个ip。这一般会包含两步：</p>
+<ul>
+<li><p>本地域名解析</p>
+<p>浏览器会首先在本机的hosts文件中查找域名映射的IP地址，如果查找到就返回IP ，没找到则进行域名服务器解析，一般本地解析都会失败，因为默认这个文件是空的。</p>
+<ul>
+<li>Windows下的hosts文件地址：C:&#x2F;Windows&#x2F;System32&#x2F;drivers&#x2F;etc&#x2F;hosts</li>
+<li>Linux下的hosts文件所在路径： &#x2F;etc&#x2F;hosts</li>
+</ul>
+<p>样式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># My hosts</span><br><span class="line">127.0.0.1 localhost</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>域名服务器解析</p>
+<p>本地解析失败，才会进行域名服务器解析，域名服务器就是网络中的一台计算机，里面记录了所有注册备案的域名和ip映射关系，一般只要域名是正确的，并且备案通过，一定能找到。</p>
+</li>
+</ul>
+<p>我们不可能去购买一个域名，因此我们可以伪造本地的hosts文件，实现对域名的解析。修改本地的host为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 www.gmall.com api.gmall.com item.gmall.com cart.gmall.com order.gmall.com auth.gmall.com search.gmall.com manager.gmall.com</span><br></pre></td></tr></table></figure>
+
+<p>这样就实现了域名的关系映射了。</p>
+<p><img src="/assets/1584542667263.png" alt="1584542667263"></p>
+<p>通过域名访问：</p>
+<p><img src="/assets/1584543394088.png" alt="1584543394088"></p>
+<h2 id="3-3-nginx反向代理"><a href="#3-3-nginx反向代理" class="headerlink" title="3.3. nginx反向代理"></a>3.3. nginx反向代理</h2><p>域名问题解决了，但是现在要访问后台页面，还得自己加上端口：<code>http://api.gmall.com:8888</code>。</p>
+<p>这就不够优雅了。我们希望的是直接域名访问：<code>http://api.gmall.com</code>。这种情况下端口默认是80，而80端口只有一个，将来我们可能有多个工程需要通过域名访问，如何让多个工程都直接通过域名访问呢？</p>
+<p>这里就要用到反向代理工具：Nginx</p>
+<p><img src="/assets/1584544747906.png" alt="1584544747906"></p>
+<p>nginx安装：略。。。。。。</p>
+<h2 id="3-4-配置反向代理"><a href="#3-4-配置反向代理" class="headerlink" title="3.4. 配置反向代理"></a>3.4. 配置反向代理</h2><p>windows宿主机hosts文件，配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">172.16.116.100 gmall.com www.gmall.com api.gmall.com item.gmall.com cart.gmall.com order.gmall.com auth.gmall.com search.gmall.com manager.gmall.com</span><br></pre></td></tr></table></figure>
+
+
+
+<p>修改nginx配置文件，完整配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">#user  nobody;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">#error_log  logs/error.log;</span><br><span class="line">#error_log  logs/error.log  notice;</span><br><span class="line">#error_log  logs/error.log  info;</span><br><span class="line"></span><br><span class="line">#pid        logs/nginx.pid;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    #log_format  main  &#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span><br><span class="line">    #                  &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span><br><span class="line">    #                  &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;</span><br><span class="line"></span><br><span class="line">    #access_log  logs/access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"></span><br><span class="line">    #keepalive_timeout  0;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    #gzip  on;</span><br><span class="line">    </span><br><span class="line">	# 代理门户</span><br><span class="line">	server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  www.gmall.com gmall.com;</span><br><span class="line"></span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass   http://192.168.3.2:2000;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	# 代理网关</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  api.gmall.com;</span><br><span class="line"></span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass   http://192.168.3.2:8888;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	# 代理后台管理</span><br><span class="line">	server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  manager.gmall.com;</span><br><span class="line"></span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass   http://192.168.3.2:1000;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启nginx命令：nginx -s reload</p>
+<p>启动nginx命令：nginx</p>
+<p>在浏览器中测试，完美！</p>
+<p><img src="/assets/1584546442325.png" alt="1584546442325"></p>
+<h1 id="4-系统管理前后端联调"><a href="#4-系统管理前后端联调" class="headerlink" title="4. 系统管理前后端联调"></a>4. 系统管理前后端联调</h1><h2 id="4-1-启动系统管理前端工程"><a href="#4-1-启动系统管理前端工程" class="headerlink" title="4.1. 启动系统管理前端工程"></a>4.1. 启动系统管理前端工程</h2><p>把课前资料&#x2F;前端工程&#x2F;gmall-admin-vue.zip解压到工作空间下，例如：</p>
+<p><img src="/assets/1584549007281.png" alt="1584549007281"></p>
+<p>这是一个用nodejs构建的项目，解压后进入项目根目录，打开cmd窗口执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install  # 安装npm依赖包</span><br><span class="line">npm start	# 启动该项目</span><br></pre></td></tr></table></figure>
+
+<p>启动成功：</p>
+<p><img src="/assets/1584549037192.png" alt="1584549037192"></p>
+<p>可以通过1000端口即可访问，这里推荐使用域名访问：</p>
+<p><img src="/assets/1584549114430.png" alt="1584549114430"></p>
+<p>此时还不能登录，因为没有对应的后台管理系统。</p>
+<h2 id="4-2-启动系统管理后台工程"><a href="#4-2-启动系统管理后台工程" class="headerlink" title="4.2. 启动系统管理后台工程"></a>4.2. 启动系统管理后台工程</h2><p>要想正常登陆，并使用后台管理系统，还需要启动如下工程</p>
+<p> <img src="/assets/1567402510618.png" alt="1567402510618"></p>
+<p>启动前，需要修改配置：</p>
+<p> <img src="/assets/1567403029427.png" alt="1567403029427"></p>
+<p>数据库连接信息：</p>
+<p><img src="/assets/1567403142563.png" alt="1567403142563"></p>
+<p>然后开始启动gmall-admin工程，启动成功后，刷新管理前端页面即可通过admin&#x2F;admin登录</p>
+<p><img src="/assets/1584549522238.png" alt="1584549522238"></p>
+<p>打开品牌管理试试：</p>
+<p><img src="/assets/1584549655227.png" alt="1584549655227"></p>
+<p>这时，你使用浏览器直接该接口，发现访问没事，但是这里却报错，什么原因？</p>
+<p>这其实是浏览器的同源策略造成的跨域问题。</p>
+<h1 id="5-跨域问题"><a href="#5-跨域问题" class="headerlink" title="5. 跨域问题"></a>5. 跨域问题</h1><p>跨域：浏览器对于javascript的同源策略的限制 。</p>
+<p>以下情况都属于跨域：</p>
+<table>
+<thead>
+<tr>
+<th>跨域原因说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>域名不同</td>
+<td><code>www.jd.com</code> 与 <code>www.taobao.com</code></td>
+</tr>
+<tr>
+<td>域名相同，端口不同</td>
+<td><code>www.jd.com:8080</code> 与 <code>www.jd.com:8081</code></td>
+</tr>
+<tr>
+<td>二级域名不同</td>
+<td><code>item.jd.com</code> 与 <code>miaosha.jd.com</code></td>
+</tr>
+</tbody></table>
+<p>如果<strong>域名和端口都相同，但是请求路径不同</strong>，不属于跨域，如：</p>
+<p><code>www.jd.com/item</code> </p>
+<p><code>www.jd.com/goods</code></p>
+<p>http和https也属于跨域</p>
+<p>而我们刚才是从<code>manager.gmall.com</code>去访问<code>api.gmall.com</code>，这属于端口不同，跨域了。</p>
+<h2 id="5-1-为什么有跨域问题？"><a href="#5-1-为什么有跨域问题？" class="headerlink" title="5.1. 为什么有跨域问题？"></a>5.1. 为什么有跨域问题？</h2><p>跨域不一定都会有跨域问题。</p>
+<p>因为跨域问题是浏览器对于ajax请求的一种安全限制：<strong>一个页面发起的ajax请求，只能是与当前页域名相同的路径</strong>，这能有效的阻止跨站攻击。</p>
+<p>因此：<strong>跨域问题 是针对ajax的一种限制</strong>。</p>
+<p>但是这却给我们的开发带来了不便，而且在实际生产环境中，肯定会有很多台服务器之间交互，地址和端口都可能不同，怎么办？</p>
+<h2 id="5-2-解决跨域问题的方案"><a href="#5-2-解决跨域问题的方案" class="headerlink" title="5.2. 解决跨域问题的方案"></a>5.2. 解决跨域问题的方案</h2><p>目前比较常用的跨域解决方案有3种：</p>
+<ul>
+<li><p>Jsonp</p>
+<p>最早的解决方案，利用script标签可以跨域的原理实现。</p>
+<p>限制：</p>
+<ul>
+<li>需要服务的支持</li>
+<li>只能发起GET请求</li>
+</ul>
+</li>
+<li><p>nginx反向代理</p>
+<p>思路是：利用nginx把跨域反向代理为不跨域，支持各种请求方式</p>
+<p>缺点：需要在nginx进行额外配置，语义不清晰 </p>
+</li>
+<li><p>CORS</p>
+<p>规范化的跨域请求解决方案，安全可靠。</p>
+<p>优势：</p>
+<ul>
+<li>在服务端进行控制是否允许跨域，可自定义规则</li>
+<li>支持各种请求方式</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>会产生额外的请求</li>
+</ul>
+</li>
+</ul>
+<p>我们这里会采用cors的跨域方案。</p>
+<h2 id="5-3-什么是cors"><a href="#5-3-什么是cors" class="headerlink" title="5.3. 什么是cors"></a>5.3. 什么是cors</h2><p>CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）。</p>
+<p>它允许浏览器向跨源服务器，发出<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2012/09/xmlhttprequest_level_2.html"><code>XMLHttpRequest</code></a>请求，从而克服了AJAX只能<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">同源</a>使用的限制。</p>
+<p>CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。</p>
+<ul>
+<li><p>浏览器端：</p>
+<p>目前，所有浏览器都支持该功能（IE10以下不行）。整个CORS通信过程，都是浏览器自动完成，不需要用户参与。</p>
+</li>
+<li><p>服务端：</p>
+<p>CORS通信与AJAX没有任何差别，因此你不需要改变以前的业务逻辑。只不过，浏览器会在请求中携带一些头信息，我们需要以此判断是否允许其跨域，然后在响应头中加入一些信息即可。这一般通过过滤器完成即可。</p>
+</li>
+</ul>
+<h2 id="5-4-原理有点复杂"><a href="#5-4-原理有点复杂" class="headerlink" title="5.4. 原理有点复杂"></a>5.4. 原理有点复杂</h2><blockquote>
+<p>预检请求</p>
+</blockquote>
+<p>跨域请求会在正式通信之前，增加一次HTTP查询请求，称为”预检”请求（preflight）。</p>
+<p>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的<code>XMLHttpRequest</code>请求，否则就报错。</p>
+<p>一个“预检”请求的样板：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">OPTIONS</span> <span class="string">/cors</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Origin</span><span class="punctuation">: </span>http://localhost:1000</span><br><span class="line"><span class="attribute">Access-Control-Request-Method</span><span class="punctuation">: </span>GET</span><br><span class="line"><span class="attribute">Access-Control-Request-Headers</span><span class="punctuation">: </span>X-Custom-Header</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Origin：会指出当前请求属于哪个域（协议+域名+端口）。服务会根据这个值决定是否允许其跨域。</p>
+</li>
+<li><p>Access-Control-Request-Method：接下来会用到的请求方式，比如PUT</p>
+</li>
+<li><p>Access-Control-Request-Headers：会额外用到的头信息</p>
+</li>
+</ul>
+<blockquote>
+<p>预检请求的响应</p>
+</blockquote>
+<p>服务的收到预检请求，如果许可跨域，会发出响应：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">HTTP/1.1</span> <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Date</span><span class="punctuation">: </span>Mon, 01 Dec 2008 01:15:39 GMT</span><br><span class="line"><span class="attribute">Server</span><span class="punctuation">: </span>Apache/2.0.61 (Unix)</span><br><span class="line"><span class="attribute">Access-Control-Allow-Origin</span><span class="punctuation">: </span>http://miaosha.jd.com</span><br><span class="line"><span class="attribute">Access-Control-Allow-Credentials</span><span class="punctuation">: </span>true</span><br><span class="line"><span class="attribute">Access-Control-Allow-Methods</span><span class="punctuation">: </span>GET, POST, PUT</span><br><span class="line"><span class="attribute">Access-Control-Allow-Headers</span><span class="punctuation">: </span>X-Custom-Header</span><br><span class="line"><span class="attribute">Access-Control-Max-Age</span><span class="punctuation">: </span>1728000</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/html; charset=utf-8</span><br><span class="line"><span class="attribute">Content-Encoding</span><span class="punctuation">: </span>gzip</span><br><span class="line"><span class="attribute">Content-Length</span><span class="punctuation">: </span>0</span><br><span class="line"><span class="attribute">Keep-Alive</span><span class="punctuation">: </span>timeout=2, max=100</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>Keep-Alive</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/plain</span><br></pre></td></tr></table></figure>
+
+<p>如果服务器允许跨域，需要在返回的响应头中携带下面信息：</p>
+<ul>
+<li>Access-Control-Allow-Origin：可接受的域，是一个具体域名或者*（代表任意域名）</li>
+<li>Access-Control-Allow-Credentials：是否允许携带cookie，默认情况下，cors不会携带cookie，除非这个值是true</li>
+<li>Access-Control-Allow-Methods：允许访问的方式</li>
+<li>Access-Control-Allow-Headers：允许携带的头</li>
+<li>Access-Control-Max-Age：本次许可的有效时长，单位是秒，<strong>过期之前的ajax请求就无需再次进行预检了</strong></li>
+</ul>
+<blockquote>
+<p>有关cookie：</p>
+</blockquote>
+<p>要想操作cookie，需要满足3个条件：</p>
+<ul>
+<li>服务的响应头中需要携带Access-Control-Allow-Credentials并且为true。</li>
+<li>浏览器发起ajax需要指定withCredentials 为true</li>
+<li>响应头中的Access-Control-Allow-Origin一定不能为*，必须是指定的域名</li>
+</ul>
+<h2 id="5-5-实现非常简单"><a href="#5-5-实现非常简单" class="headerlink" title="5.5. 实现非常简单"></a>5.5. 实现非常简单</h2><p>虽然原理比较复杂，但是前面说过：</p>
+<ul>
+<li>浏览器端都有浏览器自动完成，我们无需操心</li>
+<li>服务端可以通过拦截器统一实现，不必每次都去进行跨域判定的编写。</li>
+</ul>
+<p>事实上，Spring已经帮我们写好了CORS的跨域过滤器，内部已经实现了刚才所讲的判定逻辑。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring-webmvc：CorsFilter</span><br><span class="line">spring-webflux：CorsWebFilter</span><br></pre></td></tr></table></figure>
+
+<p>springcloud-gateway集成的是webflux，所以这里使用的是CorsWebFilter</p>
+<p>在<code>gmall-gateway</code>中编写一个配置类，并且注册CorsWebFilter：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CorsConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> CorsWebFilter <span class="title function_">corsWebFilter</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化CORS配置对象</span></span><br><span class="line">        <span class="type">CorsConfiguration</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CorsConfiguration</span>();</span><br><span class="line">        <span class="comment">// 允许的域,不要写*，否则cookie就无法使用了</span></span><br><span class="line">        config.addAllowedOrigin(<span class="string">&quot;http://manager.gmall.com&quot;</span>);</span><br><span class="line">        config.addAllowedOrigin(<span class="string">&quot;http://www.gmall.com&quot;</span>);</span><br><span class="line">        <span class="comment">// 允许的头信息</span></span><br><span class="line">        config.addAllowedHeader(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">// 允许的请求方式</span></span><br><span class="line">        config.addAllowedMethod(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">// 是否允许携带Cookie信息</span></span><br><span class="line">        config.setAllowCredentials(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 添加映射路径，我们拦截一切请求</span></span><br><span class="line">        <span class="type">UrlBasedCorsConfigurationSource</span> <span class="variable">corsConfigurationSource</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UrlBasedCorsConfigurationSource</span>();</span><br><span class="line">        corsConfigurationSource.registerCorsConfiguration(<span class="string">&quot;/**&quot;</span>, config);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CorsWebFilter</span>(corsConfigurationSource);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>测试：完美解决！</p>
+<p><img src="/assets/1584551855161.png" alt="1584551855161"></p>
+<h1 id="6-图片上传"><a href="#6-图片上传" class="headerlink" title="6. 图片上传"></a>6. 图片上传</h1><p>这里使用阿里云对象存储（OSS）</p>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/64041.html?spm=5176.87240.400427.54.1bfd4614VN7fDp">https://help.aliyun.com/document_detail/64041.html?spm=5176.87240.400427.54.1bfd4614VN7fDp</a></p>
+<p>我们之前采用sdk的方式，图片–&gt;后台服务器–&gt;阿里云。</p>
+<p>这样后台服务器面临并发压力，既然是上传给阿里云，可不可以直接传给阿里云服务器。</p>
+<p>上传成功后，只需要给我一个图片地址保存到数据库即可。</p>
+<p>查看官方文档，发现提供了浏览器直接上传到阿里云的参考文档：</p>
+<p><img src="/assets/1567410599428.png" alt="1567410599428"></p>
+<h2 id="6-1-阿里云配置"><a href="#6-1-阿里云配置" class="headerlink" title="6.1. 阿里云配置"></a>6.1. 阿里云配置</h2><p>登录到个人阿里云控制台，并创建bucket。</p>
+<p><img src="/assets/1567411636891.png" alt="1567411636891"></p>
+<p>找到<code>基础设置</code>–&gt;<code>跨域设置</code></p>
+<p><img src="/assets/1567411710328.png" alt="1567411710328"></p>
+<p>点击<code>设置</code>–&gt;<code>创建规则</code>–&gt;如下填写表单–&gt;点击<code>确定</code></p>
+<p><img src="/assets/1567411872750.png" alt="1567411872750"></p>
+<p><img src="/assets/1567411945299.png" alt="1567411945299"></p>
+<h2 id="6-2-服务端签名后直传"><a href="#6-2-服务端签名后直传" class="headerlink" title="6.2. 服务端签名后直传"></a>6.2. 服务端签名后直传</h2><p><img src="/assets/1567412332108.png" alt="1567412332108"></p>
+<p>用户发送请求到应用服务端，服务端怎么返回policy和签名？</p>
+<p>官方文档再往下翻，有java示例：</p>
+<p><img src="/assets/1567413057869.png" alt="1567413057869"></p>
+<p>点进去就有示例代码：</p>
+<p><img src="/assets/1567413433392.png" alt="1567413433392"></p>
+<h2 id="6-3-编写代码实现签名获取"><a href="#6-3-编写代码实现签名获取" class="headerlink" title="6.3. 编写代码实现签名获取"></a>6.3. 编写代码实现签名获取</h2><p><img src="/assets/1567412666674.png" alt="1567412666674"></p>
+<p>请求路径：&#x2F;pms&#x2F;oss&#x2F;policy</p>
+<p>请求方式：GET</p>
+<p>请求参数：无</p>
+<p>响应数据：统一都是Resp对象</p>
+<h3 id="6-3-1-导入OSS的依赖"><a href="#6-3-1-导入OSS的依赖" class="headerlink" title="6.3.1. 导入OSS的依赖"></a>6.3.1. 导入OSS的依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.aliyun.oss<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aliyun-sdk-oss<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-3-2-编写Controller方法"><a href="#6-3-2-编写Controller方法" class="headerlink" title="6.3.2. 编写Controller方法"></a>6.3.2. 编写Controller方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;pms/oss&quot;)</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PmsOssController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">String</span> <span class="variable">accessId</span> <span class="operator">=</span> <span class="string">&quot;LTAI4FuGwRrRAh1M8mRkndr6&quot;</span>; <span class="comment">// 请填写您的AccessKeyId。</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">accessKey</span> <span class="operator">=</span> <span class="string">&quot;LvIZkyPyKqoBGcVTY2wABYhv4QJmYT&quot;</span>; <span class="comment">// 请填写您的AccessKeySecret。</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">endpoint</span> <span class="operator">=</span> <span class="string">&quot;oss-cn-shanghai.aliyuncs.com&quot;</span>; <span class="comment">// 请填写您的 endpoint。</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">bucket</span> <span class="operator">=</span> <span class="string">&quot;ggmall&quot;</span>; <span class="comment">// 请填写您的 bucketname 。</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">host</span> <span class="operator">=</span> <span class="string">&quot;https://&quot;</span> + bucket + <span class="string">&quot;.&quot;</span> + endpoint; <span class="comment">// host的格式为 bucketname.endpoint</span></span><br><span class="line">    <span class="comment">// callbackUrl为 上传回调服务器的URL，请将下面的IP和Port配置为您自己的真实信息。</span></span><br><span class="line">    <span class="comment">//String callbackUrl = &quot;http://88.88.88.88:8888&quot;;</span></span><br><span class="line">    <span class="comment">// 图片目录，每天一个目录</span></span><br><span class="line">    <span class="type">SimpleDateFormat</span> <span class="variable">sdf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd&quot;</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">dir</span> <span class="operator">=</span> sdf.format(<span class="keyword">new</span> <span class="title class_">Date</span>()); <span class="comment">// 用户上传文件时指定的前缀。</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;policy&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseVo&lt;Object&gt; <span class="title function_">policy</span><span class="params">()</span> <span class="keyword">throws</span> UnsupportedEncodingException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">OSSClient</span> <span class="variable">client</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OSSClient</span>(endpoint, accessId, accessKey);</span><br><span class="line"></span><br><span class="line">        <span class="type">long</span> <span class="variable">expireTime</span> <span class="operator">=</span> <span class="number">30</span>;</span><br><span class="line">        <span class="type">long</span> <span class="variable">expireEndTime</span> <span class="operator">=</span> System.currentTimeMillis() + expireTime * <span class="number">1000</span>;</span><br><span class="line">        <span class="type">Date</span> <span class="variable">expiration</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>(expireEndTime);</span><br><span class="line">        <span class="type">PolicyConditions</span> <span class="variable">policyConds</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PolicyConditions</span>();</span><br><span class="line">        policyConds.addConditionItem(PolicyConditions.COND_CONTENT_LENGTH_RANGE, <span class="number">0</span>, <span class="number">1048576000</span>);</span><br><span class="line">        policyConds.addConditionItem(MatchMode.StartWith, PolicyConditions.COND_KEY, dir);</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">postPolicy</span> <span class="operator">=</span> client.generatePostPolicy(expiration, policyConds);</span><br><span class="line">        <span class="type">byte</span>[] binaryData = postPolicy.getBytes(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">encodedPolicy</span> <span class="operator">=</span> BinaryUtil.toBase64String(binaryData);</span><br><span class="line">        <span class="type">String</span> <span class="variable">postSignature</span> <span class="operator">=</span> client.calculatePostSignature(postPolicy);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, String&gt; respMap = <span class="keyword">new</span> <span class="title class_">LinkedHashMap</span>&lt;String, String&gt;();</span><br><span class="line">        respMap.put(<span class="string">&quot;accessid&quot;</span>, accessId);</span><br><span class="line">        respMap.put(<span class="string">&quot;policy&quot;</span>, encodedPolicy);</span><br><span class="line">        respMap.put(<span class="string">&quot;signature&quot;</span>, postSignature);</span><br><span class="line">        respMap.put(<span class="string">&quot;dir&quot;</span>, dir);</span><br><span class="line">        respMap.put(<span class="string">&quot;host&quot;</span>, host);</span><br><span class="line">        respMap.put(<span class="string">&quot;expire&quot;</span>, String.valueOf(expireEndTime / <span class="number">1000</span>));</span><br><span class="line">        <span class="comment">// respMap.put(&quot;expire&quot;, formatISO8601Date(expiration));</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ResponseVo.ok(respMap);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-3-3-上传测试"><a href="#6-3-3-上传测试" class="headerlink" title="6.3.3. 上传测试"></a>6.3.3. 上传测试</h3><p> <img src="/assets/1567419631674.png" alt="1567419631674"></p>
+<p><img src="/assets/1567419692132.png" alt="1567419692132"></p>
+<h2 id="6-4-参数获取"><a href="#6-4-参数获取" class="headerlink" title="6.4. 参数获取"></a>6.4. 参数获取</h2><h3 id="6-4-1-AccessKeyID及AccessKeySecret"><a href="#6-4-1-AccessKeyID及AccessKeySecret" class="headerlink" title="6.4.1. AccessKeyID及AccessKeySecret"></a>6.4.1. AccessKeyID及AccessKeySecret</h3><p><img src="/assets/1567413839486.png" alt="1567413839486"></p>
+<p><img src="/assets/1567413992798.png" alt="1567413992798"></p>
+<p><img src="/assets/1567414550420.png" alt="1567414550420"></p>
+<p>选择用户，添加权限：</p>
+<p><img src="/assets/1567414675731.png" alt="1567414675731"></p>
+<p>选择OSS所有权限</p>
+<p><img src="/assets/1567414228538.png" alt="1567414228538"></p>
+<p>完成权限的添加</p>
+<h3 id="6-4-2-bucktName及EndPoint"><a href="#6-4-2-bucktName及EndPoint" class="headerlink" title="6.4.2. bucktName及EndPoint"></a>6.4.2. bucktName及EndPoint</h3><p><img src="/assets/1567415000311.png" alt="1567415000311"></p>
+<h3 id="6-4-3-公共读权限"><a href="#6-4-3-公共读权限" class="headerlink" title="6.4.3. 公共读权限"></a>6.4.3. 公共读权限</h3><p>为了方便回显，需要把读写权限改为公共读</p>
+<p><img src="/assets/1567419407674.png" alt="1567419407674"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://beiliu266.github.io">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://beiliu266.github.io/2024/01/09/guli/2%E3%80%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81%E5%9F%9F%E5%90%8D%E3%80%81CORS%E3%80%81OSS/">https://beiliu266.github.io/2024/01/09/guli/2%E3%80%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81%E5%9F%9F%E5%90%8D%E3%80%81CORS%E3%80%81OSS/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://beiliu266.github.io" target="_blank">Hexo</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/01/09/guli/3%E3%80%81%E8%A7%84%E6%A0%BC%E5%8F%82%E6%95%B0%E5%8F%8A%E5%95%86%E5%93%81%E6%96%B0%E5%A2%9E/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2024/01/09/guli/1%E3%80%81nacos%E3%80%81gateway%E3%80%81sentinel%E3%80%81sleuth/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">1. 谷粒商城介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E9%A1%B9%E7%9B%AE%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">1.1. 项目分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-%E4%BC%A0%E7%BB%9F%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1.1. 传统项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-%E4%BA%92%E8%81%94%E7%BD%91%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.1.2. 互联网项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E8%A6%81%E8%AE%B2%E7%94%B5%E5%95%86%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">1.2. 为什么我们要讲电商？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E7%94%B5%E5%95%86%E8%A1%8C%E4%B8%9A%E7%9A%84%E5%8F%91%E5%B1%95"><span class="toc-number">1.3.</span> <span class="toc-text">1.3. 电商行业的发展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-%E9%92%B1%E6%99%AF"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.3.1. 钱景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.2.</span> <span class="toc-text">1.3.2. 数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E5%B8%B8%E8%A7%81%E7%94%B5%E5%95%86%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.4.</span> <span class="toc-text">1.4. 常见电商模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">2. 搭建项目</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E"><span class="toc-number">2.1.</span> <span class="toc-text">2.1. 项目结构说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="toc-number">2.2.</span> <span class="toc-text">2.2. 数据准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E4%BD%BF%E7%94%A8github%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="toc-number">2.3.</span> <span class="toc-text">2.3. 使用github创建仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%88%9B%E5%BB%BA"><span class="toc-number">2.4.</span> <span class="toc-text">2.4. 项目初始创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E4%BE%9D%E8%B5%96%E5%88%86%E6%9E%90"><span class="toc-number">2.5.</span> <span class="toc-text">2.5. 依赖分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%85%B6%E4%BB%96%E6%A8%A1%E5%9D%97"><span class="toc-number">2.6.</span> <span class="toc-text">2.6. 创建项目其他模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-1-%E5%88%9B%E5%BB%BA%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97"><span class="toc-number">2.6.1.</span> <span class="toc-text">2.6.1. 创建商品管理模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-2-%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97"><span class="toc-number">2.6.2.</span> <span class="toc-text">2.6.2. 创建用户管理模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-3-%E5%88%9B%E5%BB%BA%E8%AE%A2%E5%8D%95%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97"><span class="toc-number">2.6.3.</span> <span class="toc-text">2.6.3. 创建订单管理模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-4-%E5%88%9B%E5%BB%BA%E8%90%A5%E9%94%80%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97"><span class="toc-number">2.6.4.</span> <span class="toc-text">2.6.4. 创建营销管理模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-5-%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97"><span class="toc-number">2.6.5.</span> <span class="toc-text">2.6.5. 创建仓库管理模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-6-%E5%AE%8C%E6%95%B4%E5%B7%A5%E7%A8%8B"><span class="toc-number">2.6.6.</span> <span class="toc-text">2.6.6. 完整工程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81"><span class="toc-number">2.7.</span> <span class="toc-text">2.7. 逆向工程生成代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-1-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="toc-number">2.7.1.</span> <span class="toc-text">2.7.1. 修改配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-2-%E5%90%AF%E5%8A%A8%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B"><span class="toc-number">2.7.2.</span> <span class="toc-text">2.7.2. 启动逆向工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-3-%E6%8A%8A%E6%96%87%E4%BB%B6copy%E5%88%B0%E5%AF%B9%E5%BA%94%E5%B7%A5%E7%A8%8B"><span class="toc-number">2.7.3.</span> <span class="toc-text">2.7.3. 把文件copy到对应工程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-8-%E5%90%84%E4%B8%AA%E6%A8%A1%E5%9D%97%E5%B7%A5%E7%A8%8B%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">2.8.</span> <span class="toc-text">2.8. 各个模块工程的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8-1-%E5%B7%A5%E7%A8%8B%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="toc-number">2.8.1.</span> <span class="toc-text">2.8.1. 工程参数配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8-2-%E5%9C%A8%E5%BC%95%E5%AF%BC%E7%B1%BB%E4%B8%8A%E6%B7%BB%E5%8A%A0%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.8.2.</span> <span class="toc-text">2.8.2. 在引导类上添加注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8-3-%E9%85%8D%E7%BD%AE%E5%88%B0nacos"><span class="toc-number">2.8.3.</span> <span class="toc-text">2.8.3. 配置到nacos</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-9-%E5%8F%82%E7%85%A7PMS%E5%AE%8C%E6%88%90%E5%85%B6%E4%BB%96%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97"><span class="toc-number">2.9.</span> <span class="toc-text">2.9. 参照PMS完成其他管理模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-10-%E6%90%AD%E5%BB%BA%E7%BD%91%E5%85%B3%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.10.</span> <span class="toc-text">2.10. 搭建网关服务</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E9%80%9A%E8%BF%87%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE"><span class="toc-number">3.</span> <span class="toc-text">3. 通过域名访问</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E7%BB%9F%E4%B8%80%E7%8E%AF%E5%A2%83"><span class="toc-number">3.1.</span> <span class="toc-text">3.1. 统一环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90"><span class="toc-number">3.2.</span> <span class="toc-text">3.2. 域名解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-number">3.3.</span> <span class="toc-text">3.3. nginx反向代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-number">3.4.</span> <span class="toc-text">3.4. 配置反向代理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%89%8D%E5%90%8E%E7%AB%AF%E8%81%94%E8%B0%83"><span class="toc-number">4.</span> <span class="toc-text">4. 系统管理前后端联调</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E5%90%AF%E5%8A%A8%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B"><span class="toc-number">4.1.</span> <span class="toc-text">4.1. 启动系统管理前端工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E5%90%AF%E5%8A%A8%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%E5%B7%A5%E7%A8%8B"><span class="toc-number">4.2.</span> <span class="toc-text">4.2. 启动系统管理后台工程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">5. 跨域问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-number">5.1.</span> <span class="toc-text">5.1. 为什么有跨域问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E7%9A%84%E6%96%B9%E6%A1%88"><span class="toc-number">5.2.</span> <span class="toc-text">5.2. 解决跨域问题的方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-%E4%BB%80%E4%B9%88%E6%98%AFcors"><span class="toc-number">5.3.</span> <span class="toc-text">5.3. 什么是cors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-%E5%8E%9F%E7%90%86%E6%9C%89%E7%82%B9%E5%A4%8D%E6%9D%82"><span class="toc-number">5.4.</span> <span class="toc-text">5.4. 原理有点复杂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-5-%E5%AE%9E%E7%8E%B0%E9%9D%9E%E5%B8%B8%E7%AE%80%E5%8D%95"><span class="toc-number">5.5.</span> <span class="toc-text">5.5. 实现非常简单</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0"><span class="toc-number">6.</span> <span class="toc-text">6. 图片上传</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-%E9%98%BF%E9%87%8C%E4%BA%91%E9%85%8D%E7%BD%AE"><span class="toc-number">6.1.</span> <span class="toc-text">6.1. 阿里云配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%AD%BE%E5%90%8D%E5%90%8E%E7%9B%B4%E4%BC%A0"><span class="toc-number">6.2.</span> <span class="toc-text">6.2. 服务端签名后直传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E7%AD%BE%E5%90%8D%E8%8E%B7%E5%8F%96"><span class="toc-number">6.3.</span> <span class="toc-text">6.3. 编写代码实现签名获取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-1-%E5%AF%BC%E5%85%A5OSS%E7%9A%84%E4%BE%9D%E8%B5%96"><span class="toc-number">6.3.1.</span> <span class="toc-text">6.3.1. 导入OSS的依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-2-%E7%BC%96%E5%86%99Controller%E6%96%B9%E6%B3%95"><span class="toc-number">6.3.2.</span> <span class="toc-text">6.3.2. 编写Controller方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-3-%E4%B8%8A%E4%BC%A0%E6%B5%8B%E8%AF%95"><span class="toc-number">6.3.3.</span> <span class="toc-text">6.3.3. 上传测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96"><span class="toc-number">6.4.</span> <span class="toc-text">6.4. 参数获取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-1-AccessKeyID%E5%8F%8AAccessKeySecret"><span class="toc-number">6.4.1.</span> <span class="toc-text">6.4.1. AccessKeyID及AccessKeySecret</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-2-bucktName%E5%8F%8AEndPoint"><span class="toc-number">6.4.2.</span> <span class="toc-text">6.4.2. bucktName及EndPoint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-3-%E5%85%AC%E5%85%B1%E8%AF%BB%E6%9D%83%E9%99%90"><span class="toc-number">6.4.3.</span> <span class="toc-text">6.4.3. 公共读权限</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/01/09/guli/14%E3%80%81%E6%94%AF%E4%BB%98%E3%80%81%E7%A7%92%E6%9D%80/" title="无题">无题</a><time datetime="2024-01-09T12:30:18.807Z" title="发表于 2024-01-09 20:30:18">2024-01-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/01/09/guli/12%E3%80%81%E8%B4%AD%E7%89%A9%E8%BD%A6%E3%80%81SpringTask/" title="无题">无题</a><time datetime="2024-01-09T12:30:18.807Z" title="发表于 2024-01-09 20:30:18">2024-01-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/01/09/guli/13%E3%80%81%E8%AE%A2%E5%8D%95%E3%80%81%E5%BA%93%E5%AD%98/" title="无题">无题</a><time datetime="2024-01-09T12:30:18.807Z" title="发表于 2024-01-09 20:30:18">2024-01-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/01/09/guli/es%E5%85%A5%E9%97%A8/" title="无题">无题</a><time datetime="2024-01-09T12:30:18.807Z" title="发表于 2024-01-09 20:30:18">2024-01-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/01/09/guli/11%E3%80%81%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%EF%BC%88jwt%EF%BC%89/" title="无题">无题</a><time datetime="2024-01-09T12:30:18.803Z" title="发表于 2024-01-09 20:30:18">2024-01-09</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By John Doe</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
